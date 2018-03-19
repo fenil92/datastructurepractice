@@ -63,9 +63,9 @@ public:
 			cur = cur->next;
 			count++;
 		}
-		cout <<endl<< "Length of LinkedList " << count<<endl;
+		cout << endl << "Length of LinkedList " << count << endl;
 	}
-	void InsertNode(ListNode **head, int data , int pos)
+	void InsertNode(ListNode **head, int data, int pos)
 	{
 		int count = 1;
 		ListNode *newNode = new ListNode(data);
@@ -86,27 +86,27 @@ public:
 					*head = newNode;
 					break;
 				}
-				else if(count==pos)
+				else if (count == pos)
 				{
 					//insert in middle or end
 					newNode->next = cur->next;
 					cur->next = newNode;
 					break;
 				}
-				
+
 				cur = cur->next;
 			}
 		}
 	}
 
-	void DeleteNode(ListNode **head,int data)
+	void DeleteNode(ListNode **head, int data)
 	{
 		ListNode *cur = *head;
 		int pos = 0;
 		int count = 0;
 		while (cur != NULL)
 		{
-			
+
 			if (cur->val == data)
 			{
 				break;
@@ -134,29 +134,29 @@ public:
 	void RemoveNthFromEnd(ListNode* head, int n)
 	{
 		ListNode *cur = head;
-		
-			int pos = 0;
-			int count = 0;
-			while (cur != NULL)
-			{
-				cur = cur->next;
-				pos++;
-			}
-			cur = head;
-			
-				for (int i = 1;i < pos - n;i++)
-				{
-					
-					cur = cur->next;
-					
-				}
-				if (n == 1)
-				{
-					cur->next = NULL;
-				}
-				else {
-					cur->next = cur->next->next;
-				}
+
+		int pos = 0;
+		int count = 0;
+		while (cur != NULL)
+		{
+			cur = cur->next;
+			pos++;
+		}
+		cur = head;
+
+		for (int i = 1;i < pos - n;i++)
+		{
+
+			cur = cur->next;
+
+		}
+		if (n == 1)
+		{
+			cur->next = NULL;
+		}
+		else {
+			cur->next = cur->next->next;
+		}
 	}
 	//leetcode
 	ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -191,12 +191,12 @@ public:
 	//leetcode
 	ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
 
-		ListNode *l3=NULL;
+		ListNode *l3 = NULL;
 		ListNode *copyofl3;
-		ListNode **mergedList= &copyofl3;
-		if (l1 == nullptr) 
+		ListNode **mergedList = &copyofl3;
+		if (l1 == nullptr)
 		{
-			l3 = l2; 
+			l3 = l2;
 			copyofl3 = l3;
 			mergedList = &copyofl3;
 		}
@@ -210,7 +210,7 @@ public:
 		{
 			if (l1->val <= l2->val)
 			{
-				if (l3 == nullptr) 
+				if (l3 == nullptr)
 				{
 					l3 = new ListNode(l1->val);
 					copyofl3 = l3;
@@ -220,11 +220,11 @@ public:
 					l3->next = new ListNode(l1->val);
 					l3 = l3->next;
 				}
-					
-					
+
+
 				if (l1 != NULL) { l1 = l1->next; }
 			}
-			else 
+			else
 			{
 				if (l3 == nullptr)
 				{
@@ -238,7 +238,7 @@ public:
 				}
 				if (l2 != NULL) { l2 = l2->next; }
 			}
-			
+
 		}
 		if (l1 != nullptr) {
 			while (l1 != nullptr)
@@ -262,7 +262,7 @@ public:
 	}
 	//leetcode
 	ListNode* mergeKLists(vector<ListNode*>& lists) {
-		
+
 	}
 	//Leetcode - Given a sorted linked list, delete all duplicates such that each element appear only once.
 	ListNode* deleteDuplicates(ListNode* head) {
@@ -311,7 +311,7 @@ public:
 		end = cur;
 		cur->next = head;
 		int steps = length - k % length;
-		for (int i = 0;i<steps;i++)
+		for (int i = 0;i < steps;i++)
 		{
 			cur = cur->next;
 		}
@@ -348,7 +348,7 @@ public:
 		int diff = abs(lenA - lenB);
 		if (lenA > lenB)
 		{
-			for (int i = 0; i<diff;i++)
+			for (int i = 0; i < diff;i++)
 			{
 				headA = headA->next;
 			}
@@ -361,7 +361,7 @@ public:
 		}
 		else
 		{
-			for (int i = 0; i<diff;i++)
+			for (int i = 0; i < diff;i++)
 			{
 				headB = headB->next;
 			}
@@ -430,7 +430,7 @@ public:
 			}
 			cur = head;
 			int i = 0;
-			for (i= 0; i< len / 2;i++)
+			for (i = 0; i < len / 2;i++)
 			{
 				if (i != 0)
 				{
@@ -442,8 +442,8 @@ public:
 				cur = cur->next;
 			}
 
-			if (len % 2 != 0) 
-			{ 
+			if (len % 2 != 0)
+			{
 				cur->next = new ListNode(v[i]);
 			}
 
@@ -458,18 +458,18 @@ public:
 		ListNode *end = nullptr;
 		int i = 1;
 
-		while (i<n)
+		while (i < n)
 		{
-			if (i + 1 == m || m==1 ) 
-			{ 
-				prev = cur; 
+			if (i + 1 == m || m == 1)
+			{
+				prev = cur;
 			}
-		
-			
+
+
 			if (i == m)
 			{
 
-				while (i<= n)
+				while (i <= n)
 				{
 					ListNode *next = cur->next;
 					cur->next = end;
@@ -478,7 +478,7 @@ public:
 					i++;
 				}
 				if (m == 1) {
-					
+
 					prev = end;
 					while (prev->next != nullptr)
 					{
@@ -488,7 +488,7 @@ public:
 					return end;
 				}
 				else {
-					prev ->next = end;
+					prev->next = end;
 					while (prev->next != nullptr)
 					{
 						prev = prev->next;
@@ -497,9 +497,9 @@ public:
 					goto label;
 
 				}
-				
-				
-				
+
+
+
 			}
 			cur = cur->next;
 			i++;
@@ -508,52 +508,97 @@ public:
 
 	}
 
-	ListNode* sortList(ListNode* head) {
-		if (head == nullptr || head->next == nullptr) { return head; }
 
-		ListNode *prev = new ListNode(head->val);
-		ListNode *cur = head;
+	ListNode* InsertionsortList(ListNode* head) {
+		if (head == nullptr || head->next == nullptr)
+			return head;
 
-		/*while (cur->next->next != nullptr)
-		{
-			ListNode *next = cur->next;
-			if (prev->val > next->val)
-			{
-				cur->next = next -> next;
-				prev = cur->next;
-				
-				
+		ListNode *newHead = new ListNode(head->val);
+		ListNode *pointer = head->next;
+
+		// loop through each element in the list
+		while (pointer != nullptr) {
+			// insert this element to the new list
+
+			ListNode *innerPointer = newHead;
+			ListNode *next = pointer->next;
+
+			if (pointer->val <= newHead->val) {
+				ListNode *oldHead = newHead;
+				newHead = pointer;
+				newHead->next = oldHead;
 			}
 			else {
-				prev = cur->next;
-			}
-			
-			cur = next;
-		}*/
-		while (cur->next->next != nullptr)
-		{
+				while (innerPointer->next != nullptr) {
 
-			if (cur->val > cur->next->val)
-			{
+					if (pointer->val > innerPointer->val && pointer->val <= innerPointer->next->val) {
+						ListNode *oldNext = innerPointer->next;
+						innerPointer->next = pointer;
+						pointer->next = oldNext;
+					}
 
-				ListNode *next = cur->next;
-				cur->next = prev;
-				prev = cur;
-				cur = next;
+					innerPointer = innerPointer->next;
+				}
 
-			}
-			else
-			{
-				prev = cur;
-				cur = cur->next;
+				if (innerPointer->next == nullptr && pointer->val > innerPointer->val) {
+					innerPointer->next = pointer;
+					pointer->next = nullptr;
+				}
 			}
 
+			// finally
+			pointer = next;
 		}
-		return head;
+
+		return newHead;
+	}
+
+	ListNode* InsertionsortedList(ListNode* head) {
+		if (head == nullptr || head->next == nullptr)
+			return head;
+
+		ListNode *newHead = new ListNode(head->val);
+		ListNode *cur = head -> next;
+		ListNode * innerptr = newHead;
+		while (cur != nullptr)
+		{
+			//1,5,3,4,2
+			while (innerptr != nullptr && cur !=nullptr)
+			{
+				if (innerptr-> next != nullptr && innerptr->val < cur->val && innerptr->next->val > cur->val)
+				{
+					ListNode * oldNext = innerptr->next;
+					innerptr->next = new ListNode(cur->val);
+					innerptr->next->next = oldNext;
+					cur = cur->next;
+					innerptr = newHead;
+				}
+				else if(innerptr->val < cur->val && innerptr -> next == nullptr)
+				{
+					innerptr->next = new ListNode(cur->val);
+					cur = cur->next;
+				}
+				else if (innerptr->val > cur->val)
+				{
+					//ListNode * oldNext = innerptr;
+					innerptr = cur;
+					innerptr->next = new ListNode(cur->val);
+					/*cur = cur -> next;
+					innerptr = newHead;*/
+				}
+				else
+				{
+					innerptr = innerptr->next;
+				}
+			}
+			//cur = cur->next;
+		}
+		return newHead;
 	}
 private:
 
 };
+
 
 LinkedList::LinkedList()
 {
@@ -791,15 +836,15 @@ int main()
 
 #pragma region sortList
 	LinkedList l;
-	ListNode *l1 = new ListNode(1);
-	l1->next = new ListNode(5);
+	ListNode *l1 = new ListNode(5);
+	l1->next = new ListNode(4);
 	auto l2 = l1;
 	l1 = l1->next;
 	l1->next = new ListNode(3);
-	l1->next->next = new ListNode(4);
-	l1->next->next->next = new ListNode(2);
+	/*l1->next->next = new ListNode(4);
+	l1->next->next->next = new ListNode(2);*/
 	ListNode **head = &l2;
-	l.sortList(*head);
+	l.InsertionsortedList(*head);
 #pragma endregion
 }
 
