@@ -553,48 +553,6 @@ public:
 		return newHead;
 	}
 
-	ListNode* InsertionsortedList(ListNode* head) {
-		if (head == nullptr || head->next == nullptr)
-			return head;
-
-		ListNode *newHead = new ListNode(head->val);
-		ListNode *cur = head -> next;
-		ListNode * innerptr = newHead;
-		while (cur != nullptr)
-		{
-			//1,5,3,4,2
-			while (innerptr != nullptr && cur !=nullptr)
-			{
-				if (innerptr-> next != nullptr && innerptr->val < cur->val && innerptr->next->val > cur->val)
-				{
-					ListNode * oldNext = innerptr->next;
-					innerptr->next = new ListNode(cur->val);
-					innerptr->next->next = oldNext;
-					cur = cur->next;
-					innerptr = newHead;
-				}
-				else if(innerptr->val < cur->val && innerptr -> next == nullptr)
-				{
-					innerptr->next = new ListNode(cur->val);
-					cur = cur->next;
-				}
-				else if (innerptr->val > cur->val)
-				{
-					//ListNode * oldNext = innerptr;
-					innerptr = cur;
-					innerptr->next = new ListNode(cur->val);
-					/*cur = cur -> next;
-					innerptr = newHead;*/
-				}
-				else
-				{
-					innerptr = innerptr->next;
-				}
-			}
-			//cur = cur->next;
-		}
-		return newHead;
-	}
 private:
 
 };
