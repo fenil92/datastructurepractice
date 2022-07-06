@@ -24,7 +24,7 @@ Given an integer array  `nums`, return  `true`  if any value appears  **at least
 -   `-109  <= nums[i] <= 109`
 
 `Arrays LTE 217`
-	
+``` python	
         class Solution:
 	        def containsDuplicate(self, nums: List[int]) -> bool:
                 lookup = {}
@@ -36,7 +36,7 @@ Given an integer array  `nums`, return  `true`  if any value appears  **at least
                         lookup[nums[i]] = 1
                         
                 return False
-
+```
 ---
 # 2. Missing Number
 
@@ -70,7 +70,7 @@ Given an array  `nums`  containing  `n`  distinct numbers in the range  `[0, n]`
 **Follow up:**  Could you implement a solution using only  `O(1)`  extra space complexity and  `O(n)`  runtime complexity?
 
 `Arrays Bit Manipulation LTE 268`
-
+``` python
     class Solution:
         def missingNumber(self, nums: List[int]) -> int:
             lookup = set()
@@ -83,7 +83,7 @@ Given an array  `nums`  containing  `n`  distinct numbers in the range  `[0, n]`
                     return i
                 
             return None
-
+```
 ---
 
 # 3. Find All Numbers Disappeared in an Array.
@@ -112,7 +112,7 @@ Given an array  `nums`  of  `n`  integers where  `nums[i]`  is in the range  `[1
 
 `Arrays LTE 448`
 
-
+``` python
     class Solution:
         def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
             missing = []
@@ -126,7 +126,7 @@ Given an array  `nums`  of  `n`  integers where  `nums[i]`  is in the range  `[1
                     missing.append(i)
                     
             return missing
-
+```
 ---
 # 4. Single Number
 
@@ -156,7 +156,7 @@ You must implement a solution with a linear runtime complexity and use only cons
 -   Each element in the array appears twice except for one element which appears only once.
 
 `Array LTE 136`
-
+``` python
     class Solution:
         def singleNumber(self, nums: List[int]) -> int:
             nums.sort()
@@ -172,7 +172,7 @@ You must implement a solution with a linear runtime complexity and use only cons
                     right+=2
                     
             return nums[left]
-
+```
 ---
 # 5. Climbing Stairs
 
@@ -202,7 +202,7 @@ Each time you can either climb  `1`  or  `2`  steps. In how many distinct ways c
 -   `1 <= n <= 45`
 
 `Dynamic Programming LTE 70`
-
+``` python
     class Solution:
         def climbStairs(self, n: int) -> int:
         
@@ -215,7 +215,7 @@ Each time you can either climb  `1`  or  `2`  steps. In how many distinct ways c
                 two = temp
                 
             return one
-
+```
 ---
 # 6. Best Time to Buy and Sell Stock
 
@@ -244,7 +244,7 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 -   `0 <= prices[i] <= 104`
 
 `Greedy LTE 121`
-
+``` python
     class Solution:
         def maxProfit(self, prices: List[int]) -> int:
             result = 0
@@ -258,7 +258,7 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
                 r+=1
             
             return result
-
+```
 ---
 # 7. Maximum Subarray
 
@@ -290,7 +290,7 @@ A  **subarray**  is a  **contiguous**  part of an array.
 **Follow up:**  If you have figured out the  `O(n)`  solution, try coding another solution using the  **divide and conquer**  approach, which is more subtle.
 
 `Dynamic Programming LTM 53`
-
+``` python
     class Solution:
         def maxSubArray(self, nums: List[int]) -> int:
         
@@ -305,7 +305,7 @@ A  **subarray**  is a  **contiguous**  part of an array.
                 maxSum = max(curSum, maxSum) 
             
             return maxSum
-
+```
 ---
 # 8. Range Sum Query - Immutable
 Given an integer array  `nums`, handle multiple queries of the following type:
@@ -339,7 +339,7 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
 -   At most  `104`  calls will be made to  `sumRange`.
 
 `Dynamic Programming LTE 303`
-
+``` python
     class NumArray:
 
         def __init__(self, nums: List[int]):
@@ -354,7 +354,7 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
         # Your NumArray object will be instantiated and called as such:
         # obj = NumArray(nums)
         # param_1 = obj.sumRange(left,right)
-
+```
 ---
 # 9. Counting Bits
 
@@ -391,7 +391,7 @@ Given an integer  `n`, return  _an array_ `ans` _of length_ `n + 1` _such that f
 -   Can you do it without using any built-in function (i.e., like  `__builtin_popcount`  in C++)?
 
 `Dynamic Programming LTE 338`
-
+``` python
     class Solution:
         def countBits(self, n: int) -> List[int]:
             dp = [0] * (n+1)
@@ -404,6 +404,227 @@ Given an integer  `n`, return  _an array_ `ans` _of length_ `n + 1` _such that f
                 dp[i] = 1 + dp[i-offset]
                 
             return dp
-
+```
 ---
-        
+# 10. Linked List Cycle
+
+Given  `head`, the head of a linked list, determine if the linked list has a cycle in it.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the `next` pointer. Internally,  `pos` is used to denote the index of the node that tail's `next` pointer is connected to. **Note that `pos` is not passed as a parameter**.
+
+Return `true` _if there is a cycle in the linked list_. Otherwise, return  `false`.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png)
+
+**Input:** head = [3,2,0,-4], pos = 1
+**Output:** true
+**Explanation:** There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png)
+
+**Input:** head = [1,2], pos = 0
+**Output:** true
+**Explanation:** There is a cycle in the linked list, where the tail connects to the 0th node.
+
+**Example 3:**
+
+![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png)
+
+**Input:** head = [1], pos = -1
+**Output:** false
+**Explanation:** There is no cycle in the linked list.
+
+**Constraints:**
+
+-   The number of the nodes in the list is in the range  `[0, 104]`.
+-   `-105  <= Node.val <= 105`
+-   `pos`  is  `-1`  or a  **valid index**  in the linked-list.
+
+**Follow up:**  Can you solve it using  `O(1)`  (i.e. constant) memory?
+
+`Fast and slow pointers LTE 141`      
+```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.next = None
+
+    class Solution:
+        def hasCycle(self, head: Optional[ListNode]) -> bool:
+            slow, fast = head, head
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+                if slow == fast:
+                    return True
+            
+            return False
+```
+---
+# 11. Middle of the Linked List
+
+Given the  `head`  of a singly linked list, return  _the middle node of the linked list_.
+
+If there are two middle nodes, return  **the second middle**  node.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/07/23/lc-midlist1.jpg)
+
+**Input:** head = [1,2,3,4,5]
+**Output:** [3,4,5]
+**Explanation:** The middle node of the list is node 3.
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/07/23/lc-midlist2.jpg)
+
+**Input:** head = [1,2,3,4,5,6]
+**Output:** [4,5,6]
+**Explanation:** Since the list has two middle nodes with values 3 and 4, we return the second one.
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[1, 100]`.
+-   `1 <= Node.val <= 100`
+
+`Fast and slow pointers LTE 876`
+``` python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    
+    class Solution:
+        def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+            slow, fast = head, head
+            # when fast has reached end slow will be in middle
+            
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+                
+            return slow
+```
+---
+# 12. Palindrome Linked List
+
+Given the  `head`  of a singly linked list, return  `true`  if it is a palindrome.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg)
+
+**Input:** head = [1,2,2,1]
+**Output:** true
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg)
+
+**Input:** head = [1,2]
+**Output:** false
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[1, 105]`.
+-   `0 <= Node.val <= 9`
+
+**Follow up:** Could you do it in `O(n)` time and `O(1)` space?
+
+`Fast and slow pointers LTE 234`
+``` python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    class Solution:
+        def isPalindrome(self, head: Optional[ListNode]) -> bool:
+            
+            slow, fast = head, head
+            
+            # find the middle
+            while fast and fast.next:
+                fast = fast.next.next
+                slow = slow.next
+                
+            # reverse the second half
+            prev = None
+            while slow:
+                nxt = slow.next
+                slow.next = prev
+                prev = slow
+                slow = nxt
+            
+            # check for palindrome
+            left, right = head, prev
+            while left and right:
+                if left.val != right.val:
+                    return False
+                left = left.next
+                right = right.next
+            
+            # Another way to solve this problem is to iterate through linked list and create an array, then check for array palindrome. But it will require O(n) space.
+            return True
+```
+---
+# 13. Remove Linked List Elements
+
+Given the  `head`  of a linked list and an integer  `val`, remove all the nodes of the linked list that has  `Node.val == val`, and return  _the new head_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg)
+
+**Input:** head = [1,2,6,3,4,5,6], val = 6
+**Output:** [1,2,3,4,5]
+
+**Example 2:**
+
+**Input:** head = [], val = 1
+**Output:** []
+
+**Example 3:**
+
+**Input:** head = [7,7,7,7], val = 7
+**Output:** []
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[0, 104]`.
+-   `1 <= Node.val <= 50`
+-   `0 <= val <= 50`
+
+`Fast and slow pointers LTE 203`
+```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    class Solution:
+        def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+            dummy = ListNode(next=head)
+            cur = head
+            prev = dummy
+            
+            while cur:
+                nxt = cur.next
+                if cur.val == val:
+                    prev.next = nxt
+                else:
+                    prev = cur
+                    
+                cur = nxt
+                
+            return dummy.next
+ ```
+ ---
+                
