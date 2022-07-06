@@ -627,4 +627,376 @@ Given the  `head`  of a linked list and an integer  `val`, remove all the nodes 
             return dummy.next
  ```
  ---
+# 14. Remove Duplicates from Sorted List
+
+
+Given the  `head`  of a sorted linked list,  _delete all duplicates such that each element appears only once_. Return  _the linked list  **sorted**  as well_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/01/04/list1.jpg)
+
+**Input:** head = [1,1,2]
+**Output:** [1,2]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/01/04/list2.jpg)
+
+**Input:** head = [1,1,2,3,3]
+**Output:** [1,2,3]
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[0, 300]`.
+-   `-100 <= Node.val <= 100`
+-   The list is guaranteed to be  **sorted**  in ascending order.
+`Fast and slow pointers LTE 83`
+```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    class Solution:
+        def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+            dummy = ListNode(val="dummy", next=head)
+            prev = dummy
+            cur = head
+            
+            while cur:
+                nxt = cur.next
+                if prev.val == cur.val:
+                    prev.next = nxt
+                else:
+                    prev = cur
+                    
+                cur = nxt
                 
+            return dummy.next
+```
+---
+# 15. Reverse Linked List
+
+
+Given the  `head`  of a singly linked list, reverse the list, and return  _the reversed list_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)
+
+**Input:** head = [1,2,3,4,5]
+**Output:** [5,4,3,2,1]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg)
+
+**Input:** head = [1,2]
+**Output:** [2,1]
+
+**Example 3:**
+
+**Input:** head = []
+**Output:** []
+
+**Constraints:**
+
+-   The number of nodes in the list is the range  `[0, 5000]`.
+-   `-5000 <= Node.val <= 5000`
+
+**Follow up:**  A linked list can be reversed either iteratively or recursively. Could you implement both?
+`Fast and slow pointers LTE 206` 
+```python
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    class Solution:
+        def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+            prev = None
+            cur = head
+            
+            while cur:
+                nxt = cur.next
+                cur.next = prev
+                prev = cur
+                cur = nxt
+                
+            return prev
+```
+---
+# 16. Merge Two Sorted Lists
+
+You are given the heads of two sorted linked lists  `list1`  and  `list2`.
+
+Merge the two lists in a one  **sorted**  list. The list should be made by splicing together the nodes of the first two lists.
+
+Return  _the head of the merged linked list_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg)
+
+**Input:** list1 = [1,2,4], list2 = [1,3,4]
+**Output:** [1,1,2,3,4,4]
+
+**Example 2:**
+
+**Input:** list1 = [], list2 = []
+**Output:** []
+
+**Example 3:**
+
+**Input:** list1 = [], list2 = [0]
+**Output:** [0]
+
+**Constraints:**
+
+-   The number of nodes in both lists is in the range  `[0, 50]`.
+-   `-100 <= Node.val <= 100`
+-   Both  `list1`  and  `list2`  are sorted in  **non-decreasing**  order.
+`Two pointers LTE 21`
+```python
+        # Definition for singly-linked list.
+        # class ListNode:
+        #     def __init__(self, val=0, next=None):
+        #         self.val = val
+        #         self.next = next
+        class Solution:
+            def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+                dummy = ListNode()
+                cur = dummy
+                
+                while(list1 and list2):
+                    if(list1.val < list2.val):
+                        cur.next = list1
+                        list1 = list1.next
+                    else:
+                        cur.next = list2
+                        list2 = list2.next
+                    cur = cur.next
+                    
+                if list1:
+                    cur.next = list1
+                    
+                if list2:
+                    cur.next = list2
+                    
+                return dummy.next
+```
+---
+# 17. Binary Search    
+
+
+Given an array of integers  `nums`  which is sorted in ascending order, and an integer  `target`, write a function to search  `target`  in  `nums`. If  `target`  exists, then return its index. Otherwise, return  `-1`.
+
+You must write an algorithm with  `O(log n)`  runtime complexity.
+
+**Example 1:**
+
+**Input:** nums = [-1,0,3,5,9,12], target = 9
+**Output:** 4
+**Explanation:** 9 exists in nums and its index is 4
+
+**Example 2:**
+
+**Input:** nums = [-1,0,3,5,9,12], target = 2
+**Output:** -1
+**Explanation:** 2 does not exist in nums so return -1
+
+**Constraints:**
+
+-   `1 <= nums.length <= 104`
+-   `-104  < nums[i], target < 104`
+-   All the integers in  `nums`  are  **unique**.
+-   `nums`  is sorted in ascending order.
+
+`Binary search LTE 704`   
+```python
+    class Solution:
+        def search(self, nums: List[int], target: int) -> int:
+            l, r = 0, len(nums)-1
+            m = (l+r)//2
+        
+            while(l <= r):
+                if target == nums[m]:
+                    return m
+                elif target < nums[m]:
+                    r = m-1
+                else:
+                    l = m+1          
+                m = (l+r)//2
+                
+            return -1
+```
+---
+# 18. Find Smallest Letter Greater Than Target
+
+Given a characters array  `letters`  that is sorted in  **non-decreasing**  order and a character  `target`, return  _the smallest character in the array that is larger than_ `target`.
+
+**Note**  that the letters wrap around.
+
+-   For example, if  `target == 'z'`  and  `letters == ['a', 'b']`, the answer is  `'a'`.
+
+**Example 1:**
+
+**Input:** letters = ["c","f","j"], target = "a"
+**Output:** "c"
+
+**Example 2:**
+
+**Input:** letters = ["c","f","j"], target = "c"
+**Output:** "f"
+
+**Example 3:**
+
+**Input:** letters = ["c","f","j"], target = "d"
+**Output:** "f"
+
+**Constraints:**
+
+-   `2 <= letters.length <= 104`
+-   `letters[i]`  is a lowercase English letter.
+-   `letters`  is sorted in  **non-decreasing**  order.
+-   `letters`  contains at least two different characters.
+-   `target`  is a lowercase English letter.
+
+`Binary search LTE 744`
+```python
+        class Solution:
+            def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+                # binary search
+                n = len(letters)
+                l, r = 0, n
+                if letters[n-1].upper() <= target.upper() or target.upper() < letters[0].upper():
+                    return letters[0]
+                
+                m = (l+r)//2
+                
+                while(l <= r):
+                    if target.upper() >= letters[m].upper():
+                        l = m+1
+                    else:
+                        r = m-1
+                    m = (l+r)//2
+                
+            
+                return letters[m+1]
+```
+---
+# 19. Peak Index in a Mountain Array
+
+Let's call an array  `arr`  a  **mountain** if the following properties hold:
+
+-   `arr.length >= 3`
+-   There exists some  `i`  with `0 < i < arr.length - 1` such that:
+    -   `arr[0] < arr[1] < ... arr[i-1] < arr[i]`
+    -   `arr[i] > arr[i+1] > ... > arr[arr.length - 1]`
+
+Given an integer array  `arr`  that is  **guaranteed**  to be a mountain, return any `i` such that `arr[0] < arr[1] < ... arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1]`.
+
+**Example 1:**
+
+**Input:** arr = [0,1,0]
+**Output:** 1
+
+**Example 2:**
+
+**Input:** arr = [0,2,1,0]
+**Output:** 1
+
+**Example 3:**
+
+**Input:** arr = [0,10,5,2]
+**Output:** 1
+
+**Constraints:**
+
+-   `3 <= arr.length <= 104`
+-   `0 <= arr[i] <= 106`
+-   `arr`  is  **guaranteed**  to be a mountain array.
+
+**Follow up:** Finding the `O(n)` is straightforward, could you find an `O(log(n))` solution?
+`Binary search LTE 852`
+
+```python
+    class Solution:
+        def peakIndexInMountainArray(self, arr: List[int]) -> int:
+            left, right = 0 , len(arr)
+            
+            while(left <= right):
+                m = (left+right)//2
+                
+                if(arr[m] < arr[m+1]):
+                    left = m+1
+                else:
+                    right=m-1
+                    
+            return left
+```
+---
+# 20. Average of Levels in Binary Tree
+
+
+Given the `root` of a binary tree, return _the average value of the nodes on each level in the form of an array_. Answers within `10-5` of the actual answer will be accepted.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/09/avg1-tree.jpg)
+
+**Input:** root = [3,9,20,null,null,15,7]
+**Output:** [3.00000,14.50000,11.00000]
+Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+Hence return [3, 14.5, 11].
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/03/09/avg2-tree.jpg)
+
+**Input:** root = [3,9,20,15,7]
+**Output:** [3.00000,14.50000,11.00000]
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[1, 104]`.
+-   `-231  <= Node.val <= 231  - 1`
+
+`BFS LTE 637`
+```python
+        # Definition for a binary tree node.
+        # class TreeNode:
+        #     def __init__(self, val=0, left=None, right=None):
+        #         self.val = val
+        #         self.left = left
+        #         self.right = right
+        class Solution:
+            def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+                q = collections.deque()
+                avg = []
+                res = []
+                q.append(root)
+                
+                while len(q) > 0:
+                    qLen = len(q)
+                    level = []
+                    for i in range(qLen):
+                        node = q.popleft()
+                        if node: 
+                            level.append(node.val)
+                            if node.left:
+                                q.append(node.left)
+                            if node.right:
+                                q.append(node.right)
+                    if level:
+                        res.append(level)
+                
+                for i in range(len(res)):
+                    avg.append(sum(res[i])/len(res[i]))
+                
+                return avg
+```
+---                
+                
+            
