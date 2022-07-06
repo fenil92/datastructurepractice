@@ -1773,3 +1773,373 @@ You must write an algorithm that runs in `O(n)` time and without using the divis
             
 ```
 ---
+# 35. Find the Duplicate Number
+Given an array of integers  `nums`  containing `n + 1`  integers where each integer is in the range  `[1, n]`  inclusive.
+
+There is only  **one repeated number**  in  `nums`, return  _this repeated number_.
+
+You must solve the problem  **without**  modifying the array  `nums` and uses only constant extra space.
+
+**Example 1:**
+
+**Input:** nums = [1,3,4,2,2]
+**Output:** 2
+
+**Example 2:**
+
+**Input:** nums = [3,1,3,4,2]
+**Output:** 3
+
+**Constraints:**
+
+-   `1 <= n <= 105`
+-   `nums.length == n + 1`
+-   `1 <= nums[i] <= n`
+-   All the integers in  `nums`  appear only  **once**  except for  **precisely one integer**  which appears  **two or more**  times.
+
+**Follow up:**
+
+-   How can we prove that at least one duplicate number must exist in  `nums`?
+-   Can you solve the problem in linear runtime complexity?
+
+```python
+code here
+```
+---
+# 36. Find All Duplicates in an Array
+Given an integer array  `nums`  of length  `n`  where all the integers of  `nums`  are in the range  `[1, n]`  and each integer appears  **once**  or  **twice**, return  _an array of all the integers that appears  **twice**_.
+
+You must write an algorithm that runs in `O(n)` time and uses only constant extra space.
+
+**Example 1:**
+
+**Input:** nums = [4,3,2,7,8,2,3,1]
+**Output:** [2,3]
+
+**Example 2:**
+
+**Input:** nums = [1,1,2]
+**Output:** [1]
+
+**Example 3:**
+
+**Input:** nums = [1]
+**Output:** []
+
+**Constraints:**
+
+-   `n == nums.length`
+-   `1 <= n <= 105`
+-   `1 <= nums[i] <= n`
+-   Each element in  `nums`  appears  **once**  or  **twice**.
+
+```python
+code here
+
+```
+---
+# 37. Set Matrix Zeroes
+Given an  `m x n`  integer matrix  `matrix`, if an element is  `0`, set its entire row and column to  `0`'s.
+
+You must do it  [in place](https://en.wikipedia.org/wiki/In-place_algorithm).
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/08/17/mat1.jpg)
+
+**Input:** matrix = [[1,1,1],[1,0,1],[1,1,1]]
+**Output:** [[1,0,1],[0,0,0],[1,0,1]]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/08/17/mat2.jpg)
+
+**Input:** matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+**Output:** [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+
+**Constraints:**
+
+-   `m == matrix.length`
+-   `n == matrix[0].length`
+-   `1 <= m, n <= 200`
+-   `-231  <= matrix[i][j] <= 231  - 1`
+
+**Follow up:**
+
+-   A straightforward solution using  `O(mn)`  space is probably a bad idea.
+-   A simple improvement uses  `O(m + n)`  space, but still not the best solution.
+-   Could you devise a constant space solution?
+
+```python
+    class Solution:
+        def setZeroes(self, matrix: List[List[int]]) -> None:
+            """
+            Do not return anything, modify matrix in-place instead.
+            """
+            ROWS, COLS = len(matrix), len(matrix[0])
+            rowZero = False
+            
+            # determine which rows/cols needs to be zeroed
+            for r in range(ROWS):
+                for c in range(COLS):
+                    if matrix[r][c] == 0:
+                        matrix[0][c] = 0
+                        if r > 0:
+                            matrix[r][0] = 0
+                        else:
+                            rowZero = True
+                            
+            # print(matrix, rowZero)          
+            for r in range(1, ROWS):
+                for c in range(1, COLS):
+                    if matrix[0][c] == 0 or matrix[r][0] == 0:
+                        matrix[r][c] = 0
+            
+            # If first element is zero make column zero
+            if matrix[0][0] == 0:
+                for r in range(ROWS):
+                    matrix[r][0] = 0
+            
+            # make row zeros
+            if rowZero:
+                for c in range(COLS):
+                    matrix[0][c] = 0
+                
+         
+```
+---
+# 38. Spiral Matrix
+
+Given an  `m x n`  `matrix`, return  _all elements of the_  `matrix`  _in spiral order_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/11/13/spiral1.jpg)
+
+**Input:** matrix = [[1,2,3],[4,5,6],[7,8,9]]
+**Output:** [1,2,3,6,9,8,7,4,5]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/11/13/spiral.jpg)
+
+**Input:** matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+**Output:** [1,2,3,4,8,12,11,10,9,5,6,7]
+
+**Constraints:**
+
+-   `m == matrix.length`
+-   `n == matrix[i].length`
+-   `1 <= m, n <= 10`
+-   `-100 <= matrix[i][j] <= 100`
+
+```python
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        left, right = 0, len(matrix[0])
+        top, bottom = 0, len(matrix)
+        result = []
+        
+        while left < right and top < bottom:
+            # get every i in top row
+            for i in range(left, right):
+                result.append(matrix[left][i])
+            top +=1
+            
+            # get every i in right col
+            for i in range(top, bottom):
+                result.append(matrix[i][right-1])
+            right-=1
+            
+            # case when there is only one row or one column
+            if not( left < right and top < bottom):
+                break
+            
+            # get every i in bottom row
+            for i in range(right-1, left-1, -1):
+                result.append(matrix[bottom-1][i])
+            bottom-=1
+            
+            # get every i in left col
+            for i in range(bottom-1, top-1, -1):
+                result.append(matrix[i][left])
+            left+=1
+            
+            
+           
+            
+        return result
+            
+                                  
+```
+---
+# 39. Rotate Image
+You are given an  `n x n`  2D  `matrix`  representing an image, rotate the image by  **90**  degrees (clockwise).
+
+You have to rotate the image  [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm), which means you have to modify the input 2D matrix directly.  **DO NOT**  allocate another 2D matrix and do the rotation.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/08/28/mat1.jpg)
+
+**Input:** matrix = [[1,2,3],[4,5,6],[7,8,9]]
+**Output:** [[7,4,1],[8,5,2],[9,6,3]]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/08/28/mat2.jpg)
+
+**Input:** matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+**Output:** [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+
+**Constraints:**
+
+-   `n == matrix.length == matrix[i].length`
+-   `1 <= n <= 20`
+-   `-1000 <= matrix[i][j] <= 1000`
+
+```python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        l, r = 0, len(matrix) -1
+        
+        while l < r:
+            for i in range(r-l):
+                top, bottom = l, r
+                
+                # save the top left
+                topleft = matrix[top][l + i]
+                
+                # move bottom left to top left
+                matrix[top][l + i] = matrix[bottom - i][l]
+                
+                # move bottom right to bottom left
+                matrix[bottom - i][l] = matrix[bottom][r - i]
+                
+                # move top right to bottom right
+                matrix[bottom][r - i] = matrix[top + i][r]
+                
+                # move top left to top right
+                matrix[top + i][r] = topleft
+        
+            l+=1
+            r-=1
+```
+---
+# 40. Word Search
+Given an  `m x n`  grid of characters  `board`  and a string  `word`, return  `true`  _if_  `word`  _exists in the grid_.
+
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/11/04/word2.jpg)
+
+**Input:** board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+**Output:** true
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg)
+
+**Input:** board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+**Output:** true
+
+**Example 3:**
+
+![](https://assets.leetcode.com/uploads/2020/10/15/word3.jpg)
+
+**Input:** board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+**Output:** false
+
+**Constraints:**
+
+-   `m == board.length`
+-   `n = board[i].length`
+-   `1 <= m, n <= 6`
+-   `1 <= word.length <= 15`
+-   `board`  and  `word`  consists of only lowercase and uppercase English letters.
+
+**Follow up:**  Could you use search pruning to make your solution faster with a larger  `board`?
+
+```python
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        # backtracking
+        
+        ROWS, COLS = len(board), len(board[0])
+        path = set()
+        
+        def dfs(r, c, i):
+            # reached the end of the word
+            if i == len(word):
+                return True
+            
+            # out of bound case | letter does not match | repeated path match
+            if (r < 0 or c < 0 or r >= ROWS or c >= COLS
+               or word[i] != board[r][c]
+               or (r, c) in path):
+                return False
+            
+            # found match
+            path.add((r,c))
+            # check all four adajacent positions
+            res = (dfs(r+1, c, i+1) or
+                   dfs(r-1, c, i+1) or
+                   dfs(r, c + 1, i+1) or
+                   dfs(r, c - 1, i+1))
+            
+            path.remove((r, c)) # cleaning the path
+            return res
+        
+        # O(n * n * 4^n) time complexity
+        for r in range(ROWS):
+            for c in range(COLS):
+                if(dfs(r, c, 0)):
+                    return True
+        return False
+```
+---
+# 41. Longest Consecutive Sequence
+Given an unsorted array of integers  `nums`, return  _the length of the longest consecutive elements sequence._
+
+You must write an algorithm that runs in `O(n)` time.
+
+**Example 1:**
+
+**Input:** nums = [100,4,200,1,3,2]
+**Output:** 4
+**Explanation:** The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4.
+
+**Example 2:**
+
+**Input:** nums = [0,3,7,2,5,8,4,6,0,1]
+**Output:** 9
+
+**Constraints:**
+
+-   `0 <= nums.length <= 105`
+-   `-109  <= nums[i] <= 109`
+
+```python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        # if we sort the array then time complexity will be O(nlogn). We need to solve O(n) time
+        
+        numSet = set(nums)
+        longest = 0
+        
+        for n in nums:
+            # Check if it is the start of a sequence. We can determine that by checking if n-1 is there in the set. If it does not exists then it is treated as a start of sequence
+            if (n-1) not in numSet:
+                l = 0
+                while (n + l) in numSet:
+                    l+=1
+                longest = max(longest, l)
+                
+        return longest
+```
+---
