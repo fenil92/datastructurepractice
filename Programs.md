@@ -998,5 +998,778 @@ Hence return [3, 14.5, 11].
                 return avg
 ```
 ---                
+ # 21. Minimum Depth of Binary Tree
+ 
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+**Note:** A leaf is a node with no children.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/10/12/ex_depth.jpg)
+
+**Input:** root = [3,9,20,null,null,15,7]
+**Output:** 2
+
+**Example 2:**
+
+**Input:** root = [2,null,3,null,4,null,5,null,6]
+**Output:** 5
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[0, 105]`.
+-   `-1000 <= Node.val <= 1000`
+
+`BFS DFS LTE 111`
+
+```python
+        # Definition for a binary tree node.
+        # class TreeNode:
+        #     def __init__(self, val=0, left=None, right=None):
+        #         self.val = val
+        #         self.left = left
+        #         self.right = right
+        class Solution:
+            def minDepth(self, root: Optional[TreeNode]) -> int:
+                if not root:
+                    return 0
+                if not root.left and not root.right:
+                    return 1
+                if not root.left:
+                    return 1+ self.minDepth(root.right)
+                if not root.right:
+                    return 1+ self.minDepth(root.left)
                 
+                #recursive depth first search
+                return 1+ min(self.minDepth(root.left), self.minDepth(root.right))
+```            
+---
+# 22. Same Tree
+
+Given the roots of two binary trees  `p`  and  `q`, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg)
+
+**Input:** p = [1,2,3], q = [1,2,3]
+**Output:** true
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg)
+
+**Input:** p = [1,2], q = [1,null,2]
+**Output:** false
+
+**Example 3:**
+
+![](https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg)
+
+**Input:** p = [1,2,1], q = [1,1,2]
+**Output:** false
+
+**Constraints:**
+
+-   The number of nodes in both trees is in the range  `[0, 100]`.
+-   `-104  <= Node.val <= 104`
+
+`DFS LTE 100`
+
+```python
+        # Definition for a binary tree node.
+        # class TreeNode:
+        #     def __init__(self, val=0, left=None, right=None):
+        #         self.val = val
+        #         self.left = left
+        #         self.right = right
+        class Solution:
+            def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+                if not p and not q:
+                    return True
+                if not p or not q or p.val!=q.val:
+                    return False
+                
+                return (self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right))
+```
+---
+# 23.  Path Sum
+
+Given the  `root`  of a binary tree and an integer  `targetSum`, return  `true`  if the tree has a  **root-to-leaf**  path such that adding up all the values along the path equals  `targetSum`.
+
+A  **leaf**  is a node with no children.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/01/18/pathsum1.jpg)
+
+**Input:** root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+**Output:** true
+**Explanation:** The root-to-leaf path with the target sum is shown.
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/01/18/pathsum2.jpg)
+
+**Input:** root = [1,2,3], targetSum = 5
+**Output:** false
+**Explanation:** There two root-to-leaf paths in the tree:
+(1 --> 2): The sum is 3.
+(1 --> 3): The sum is 4.
+There is no root-to-leaf path with sum = 5.
+
+**Example 3:**
+
+**Input:** root = [], targetSum = 0
+**Output:** false
+**Explanation:** Since the tree is empty, there are no root-to-leaf paths.
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[0, 5000]`.
+-   `-1000 <= Node.val <= 1000`
+-   `-1000 <= targetSum <= 1000`
+
+`DFS LTE 112`
+
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    class Solution:
+        def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
             
+            def dfs(node, curSum):       
+                if not node:
+                    return False
+                
+                curSum += node.val
+                if (not node.left and not node.right):
+                    return curSum == targetSum
+                
+                return (dfs(node.left, curSum) or dfs(node.right, curSum))
+            
+            return dfs(root, 0)
+```
+---
+# 24. Maximum Depth of Binary Tree
+Given the  `root`  of a binary tree, return  _its maximum depth_.
+
+A binary tree's  **maximum depth** is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg)
+
+**Input:** root = [3,9,20,null,null,15,7]
+**Output:** 3
+
+**Example 2:**
+
+**Input:** root = [1,null,2]
+**Output:** 2
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[0, 104]`.
+-   `-100 <= Node.val <= 100`
+
+`DFS LTE 104`
+
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    class Solution:
+        def maxDepth(self, root: Optional[TreeNode]) -> int:
+            if not root:
+                return 0
+            
+            return 1+ max(self.maxDepth(root.left), self.maxDepth(root.right))
+```
+---
+# 25. Diameter of Binary Tree
+
+Given the  `root`  of a binary tree, return  _the length of the  **diameter**  of the tree_.
+
+The  **diameter**  of a binary tree is the  **length**  of the longest path between any two nodes in a tree. This path may or may not pass through the  `root`.
+
+The  **length**  of a path between two nodes is represented by the number of edges between them.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/06/diamtree.jpg)
+
+**Input:** root = [1,2,3,4,5]
+**Output:** 3
+**Explanation:** 3 is the length of the path [4,2,1,3] or [5,2,1,3].
+
+**Example 2:**
+
+**Input:** root = [1,2]
+**Output:** 1
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[1, 104]`.
+-   `-100 <= Node.val <= 100`
+
+`DFS LTE 543`
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    class Solution:
+        def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+            res = [0]
+            
+            def dfs(node):
+                
+                if not node:
+                    return -1 #height of null tree  
+                
+                left = dfs(node.left) #left height
+                right = dfs(node.right) #right height
+                res[0] = max(res[0], left +right+2)
+                
+                return 1+ max(left, right)
+            
+            dfs(root)
+            return res[0]
+```
+---
+# 26. Merge Two Binary Trees
+
+You are given two binary trees  `root1`  and  `root2`.
+
+Imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not. You need to merge the two trees into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of the new tree.
+
+Return  _the merged tree_.
+
+**Note:**  The merging process must start from the root nodes of both trees.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/02/05/merge.jpg)
+
+**Input:** root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]
+**Output:** [3,4,5,5,4,null,7]
+
+**Example 2:**
+
+**Input:** root1 = [1], root2 = [1,2]
+**Output:** [2,2]
+
+**Constraints:**
+
+-   The number of nodes in both trees is in the range  `[0, 2000]`.
+-   `-104  <= Node.val <= 104`
+
+`DFS LTE 617`
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    class Solution:
+        def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
+            
+            if not root1 and not root2:
+                return None
+            
+            v1 = root1.val if root1 else 0
+            v2 = root2.val if root2 else 0
+            
+            root = TreeNode(v1+v2)
+            root.left = self.mergeTrees(root1.left if root1 else None, root2.left if root2 else None)
+            root.right = self.mergeTrees(root1.right if root1 else None, root2.right if root2 else None)
+            
+            return root
+```
+---
+# 27. Lowest Common Ancestor of a Binary Search Tree
+
+Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
+
+According to the  [definition of LCA on Wikipedia](https://en.wikipedia.org/wiki/Lowest_common_ancestor): “The lowest common ancestor is defined between two nodes  `p`  and  `q`  as the lowest node in  `T`  that has both  `p`  and  `q`  as descendants (where we allow  **a node to be a descendant of itself**).”
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2018/12/14/binarysearchtree_improved.png)
+
+**Input:** root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+**Output:** 6
+**Explanation:** The LCA of nodes 2 and 8 is 6.
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2018/12/14/binarysearchtree_improved.png)
+
+**Input:** root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+**Output:** 2
+**Explanation:** The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
+
+**Example 3:**
+
+**Input:** root = [2,1], p = 2, q = 1
+**Output:** 2
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[2, 105]`.
+-   `-109  <= Node.val <= 109`
+-   All  `Node.val`  are  **unique**.
+-   `p != q`
+-   `p`  and  `q`  will exist in the BST.
+
+`DFS LTE 235`
+
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, x):
+    #         self.val = x
+    #         self.left = None
+    #         self.right = None
+
+    class Solution:
+        def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+            # check for empty tree
+            if not root:
+                return
+            
+            cur = root
+            while cur:
+                
+                # check if p and q are greater than current node, means descendant will be on right subtree
+                if p.val > cur.val and q.val > cur.val:
+                    cur = cur.right
+                elif p.val < cur.val and q.val < cur.val:
+                    cur = cur.left
+                else:
+                    return cur
+            
+```
+---
+# 28. Subtree of Another Tree
+
+Given the roots of two binary trees  `root`  and  `subRoot`, return  `true`  if there is a subtree of  `root`  with the same structure and node values of `subRoot`  and  `false`  otherwise.
+
+A subtree of a binary tree  `tree`  is a tree that consists of a node in  `tree`  and all of this node's descendants. The tree  `tree`  could also be considered as a subtree of itself.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/04/28/subtree1-tree.jpg)
+
+**Input:** root = [3,4,5,1,2], subRoot = [4,1,2]
+**Output:** true
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/04/28/subtree2-tree.jpg)
+
+**Input:** root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
+**Output:** false
+
+**Constraints:**
+
+-   The number of nodes in the  `root`  tree is in the range  `[1, 2000]`.
+-   The number of nodes in the  `subRoot`  tree is in the range  `[1, 1000]`.
+-   `-104  <= root.val <= 104`
+-   `-104  <= subRoot.val <= 104`
+
+`DFS LTE 572`
+
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    class Solution:
+        def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+            
+            #if the subRoot is empty, then return true
+            if not subRoot:
+                return True
+            
+            # if the root is null, then return False
+            if not root:
+                return False
+            
+            if self.isSameTree(root, subRoot):
+                return True
+                
+                
+            # If the root subtree does not match traverse through left and right subtree
+            return (self.isSubtree(root.left, subRoot) or
+                        self.isSubtree(root.right, subRoot))
+                
+        
+        def isSameTree(self, root, subRoot):
+            #reached the end of the tree
+            if not root and not subRoot:
+                return True
+            
+            # If root value of both tree matches
+            if root and subRoot and root.val == subRoot.val:
+                return (self.isSameTree(root.left, subRoot.left)
+                        and self.isSameTree(root.right, subRoot.right))
+            
+            return False
+        
+```
+---
+# 29. Invert Binary Tree
+Given the  `root`  of a binary tree, invert the tree, and return  _its root_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg)
+
+**Input:** root = [4,2,7,1,3,6,9]
+**Output:** [4,7,2,9,6,3,1]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg)
+
+**Input:** root = [2,1,3]
+**Output:** [2,3,1]
+
+**Example 3:**
+
+**Input:** root = []
+**Output:** []
+
+**Constraints:**
+
+-   The number of nodes in the tree is in the range  `[0, 100]`.
+-   `-100 <= Node.val <= 100`
+
+`DFS LTE 226`
+
+```python
+    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    class Solution:
+        def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+            if not root:
+                return None
+                    
+            # DFS recursive method
+            if root.left and root.right:
+                # swap nodes
+                tmp = root.left
+                root.left = root.right
+                root.right = tmp
+                    
+            self.invertTree(root.left)
+            self.invertTree(root.right)
+            return root
+```
+---
+# 30. Two Sum
+Given an array of integers  `nums` and an integer  `target`, return  _indices of the two numbers such that they add up to  `target`_.
+
+You may assume that each input would have  **_exactly_  one solution**, and you may not use the  _same_  element twice.
+
+You can return the answer in any order.
+
+**Example 1:**
+
+**Input:** nums = [2,7,11,15], target = 9
+**Output:** [0,1]
+**Explanation:** Because nums[0] + nums[1] == 9, we return [0, 1].
+
+**Example 2:**
+
+**Input:** nums = [3,2,4], target = 6
+**Output:** [1,2]
+
+**Example 3:**
+
+**Input:** nums = [3,3], target = 6
+**Output:** [0,1]
+
+**Constraints:**
+
+-   `2 <= nums.length <= 104`
+-   `-109  <= nums[i] <= 109`
+-   `-109  <= target <= 109`
+-   **Only one valid answer exists.**
+
+**Follow-up:** Can you come up with an algorithm that is less than `O(n2)` time complexity?
+
+`Two pointers LTE 1`
+
+```python
+    class Solution:
+        def twoSum(self, nums: List[int], target: int) -> List[int]:
+            for i in range(len(nums)):
+                for j in range(i+1, len(nums)):
+                    if(nums[i]+nums[j] == target):
+                        return [i, j]
+                    
+            return
+            
+```
+---
+# 31. Squares of a Sorted Array
+
+Given an integer array  `nums`  sorted in  **non-decreasing**  order, return  _an array of  **the squares of each number**  sorted in non-decreasing order_.
+
+**Example 1:**
+
+**Input:** nums = [-4,-1,0,3,10]
+**Output:** [0,1,9,16,100]
+**Explanation:** After squaring, the array becomes [16,1,0,9,100].
+After sorting, it becomes [0,1,9,16,100].
+
+**Example 2:**
+
+**Input:** nums = [-7,-3,2,3,11]
+**Output:** [4,9,9,49,121]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 104`
+-   `-104  <= nums[i] <= 104`
+-   `nums`  is sorted in  **non-decreasing**  order.
+
+**Follow up:** Squaring each element and sorting the new array is very trivial, could you find an `O(n)` solution using a different approach?
+
+`LTE 977`
+
+```python
+    class Solution:
+        def sortedSquares(self, nums: List[int]) -> List[int]:
+            if not nums:
+                return None
+            
+            result = []
+            l , r = 0, len(nums)-1
+            # two pointer
+            while l <= r:
+                if abs(nums[l]) <= abs(nums[r]):
+                    result.append(nums[r]* nums[r])
+                    # right is greater than left
+                    r-=1
+                else:
+                    result.append(nums[l]* nums[l]) 
+                    l+=1
+            
+            return result[::-1] #reverse
+```
+---
+# 32. Backspace String Compare
+Given two strings  `s`  and  `t`, return  `true`  _if they are equal when both are typed into empty text editors_.  `'#'`  means a backspace character.
+
+Note that after backspacing an empty text, the text will continue empty.
+
+**Example 1:**
+
+**Input:** s = "ab#c", t = "ad#c"
+**Output:** true
+**Explanation:** Both s and t become "ac".
+
+**Example 2:**
+
+**Input:** s = "ab##", t = "c#d#"
+**Output:** true
+**Explanation:** Both s and t become "".
+
+**Example 3:**
+
+**Input:** s = "a#c", t = "b"
+**Output:** false
+**Explanation:** s becomes "c" while t becomes "b".
+
+**Constraints:**
+
+-   `1 <= s.length, t.length <= 200`
+-   `s`  and  `t`  only contain lowercase letters and  `'#'`  characters.
+
+**Follow up:**  Can you solve it in  `O(n)`  time and  `O(1)`  space?
+
+`LTE 844`
+
+```python
+    class Solution:
+        def backspaceCompare(self, s: str, t: str) -> bool:
+            l, r = len(s) -1, len(t) -1
+            
+            while l >= 0 or r >= 0:
+                
+                left_valid = get_next_valid(s, l)
+                right_valid = get_next_valid(t, r)
+                #print (left_valid, right_valid)
+                # both pointers reached to the beginning of string which means all characters matched 
+                if left_valid < 0 and right_valid < 0: 
+                    return True
+                
+                # If one of the pointer reaches the beginning of string
+                if left_valid < 0 or right_valid < 0:
+                    return False
+                
+                # If characters does not match
+                if s[left_valid] != t[right_valid]:
+                    return False
+                
+                l = left_valid-1
+                r = right_valid-1
+            return True   
+
+    def get_next_valid(s, index):
+            backspace = 0
+            
+            while index>=0:
+                if s[index] == "#":
+                    backspace += 1
+                elif backspace > 0:
+                    backspace -=1
+                else:
+                    break
+                index -=1 
+            
+            return index
+        
+                
+        
+```
+---
+# 33. Majority Element
+Given an array  `nums`  of size  `n`, return  _the majority element_.
+
+The majority element is the element that appears more than  `⌊n / 2⌋`  times. You may assume that the majority element always exists in the array.
+
+**Example 1:**
+
+**Input:** nums = [3,2,3]
+**Output:** 3
+
+**Example 2:**
+
+**Input:** nums = [2,2,1,1,1,2,2]
+**Output:** 2
+
+**Constraints:**
+
+-   `n == nums.length`
+-   `1 <= n <= 5 * 104`
+-   `-109  <= nums[i] <= 109`
+
+**Follow-up:** Could you solve the problem in linear time and in `O(1)` space?
+
+```python
+    class Solution:
+        def majorityElement(self, nums: List[int]) -> int:
+            # To solve it in O(1) space, we require Boyer Moores algorithm
+            res, maxCount = 0, 0
+            for n in nums:
+                if maxCount == 0:
+                    res = n
+                    maxCount = 1
+                elif res == n:
+                    maxCount +=1
+                else:
+                    maxCount -=1
+            
+            return res
+                    
+        
+        
+        '''   
+        # frequency counter method is one of the way to solve this problem, however it takes O(n) space.
+            # dictionary to store element frequency
+        
+            count= {}
+            res, maxCount = 0, 0
+            for n in nums:
+                count[n] = 1 + count.get(n, 0)
+                res = n if count[n] > maxCount else res
+                maxCount = max(count[res], maxCount)
+                
+            return res
+        '''
+```
+---
+# 34.  Product of Array Except Self
+
+Given an integer array  `nums`, return  _an array_  `answer`  _such that_  `answer[i]`  _is equal to the product of all the elements of_  `nums`  _except_  `nums[i]`.
+
+The product of any prefix or suffix of  `nums`  is  **guaranteed**  to fit in a  **32-bit**  integer.
+
+You must write an algorithm that runs in `O(n)` time and without using the division operation.
+
+**Example 1:**
+
+**Input:** nums = [1,2,3,4]
+**Output:** [24,12,8,6]
+
+**Example 2:**
+
+**Input:** nums = [-1,1,0,-3,3]
+**Output:** [0,0,9,0,0]
+
+**Constraints:**
+
+-   `2 <= nums.length <= 105`
+-   `-30 <= nums[i] <= 30`
+-   The product of any prefix or suffix of  `nums`  is  **guaranteed**  to fit in a  **32-bit**  integer.
+
+**Follow up:** Can you solve the problem in  `O(1)` extra space complexity? (The output array  **does not**  count as extra space for space complexity analysis.)
+
+```python
+    class Solution:
+        def productExceptSelf(self, nums: List[int]) -> List[int]:
+            '''
+    main problem here is it is mentioned to not use division operator and solve it in O(n). If division operation was permissible, this would have been a very problem we can get the total product of array and then divide each element to get the resultant array.
+            '''
+            '''
+            Another way to solve the problem is by traversing the array 2 times and saving the prefix and postfix element multiples. For example
+        Input : [1,2,3,4]
+        Prefix: [1,2,6,24]
+        Postfix: [24,24,12,4]
+        Result would be the multiple of prefix and postfix
+        [24,12,8,6]. 
+        We will try to solve this problem without defining separate array of prefix and postfix.
+            '''
+            res = [1] * len(nums)
+            prefix = 1
+            for i in range(len(nums)):
+                res[i] = prefix
+                prefix *= nums[i]
+                
+            postfix = 1
+            j = len(nums) -1
+            while j >= 0:
+                res[j] *= postfix
+                postfix *= nums[j]
+                j-=1
+                
+            return res
+            
+```
+---
