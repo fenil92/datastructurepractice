@@ -2627,6 +2627,50 @@ class Solution:
             
 ```
 ---
+# 52. Target Sum
+
+```python
+```
+---
+# 53. Palindrome Partitioning
+
+```python
+```
+---
+# 54. Letter Combinations of a Phone Number
+
+```python
+```
+---
+# 55. House Robber
+
+```python
+```
+---
+# 56. House Robber II
+
+```python
+```
+---
+
+# 57. Coin Change
+
+```python
+```
+---
+
+# 58. Maximum Product Subarray
+
+
+```python
+```
+---
+
+# 59. Longest Increasing Subsequence
+
+```python
+```
+---
 ---
 #  60. Longest Palindromic Substring
 Given a string  `s`, return  _the longest palindromic substring_  in  `s`.
@@ -2715,5 +2759,516 @@ Note that you are allowed to reuse a dictionary word.
 
 ```python
 
+```
+---
+# 62. Combination Sum IV
+
+```python
+```
+---
+
+# 63. Decode Ways
+
+```python
+```
+---
+
+# 64. Unique Paths
+
+```python
+```
+---
+
+# 65. Jump Game
+
+```python
+```
+---
+
+# 66. Palindromic Substrings
+
+```python
+```
+---
+
+# 67. Number of Longest Increasing Subsequence
+
+```python
+```
+---
+
+# 68. Partition Equal Subset Sum
+
+```python
+```
+---
+
+# 69. Partition to K Equal Sum Subsets
+
+```python
+```
+---
+# 70. Best Time to Buy and Sell Stock with Cooldown
+
+```python
+```
+---
+
+# 71. Linked List Cycle II
+
+```python
+```
+---
+
+# 72. Add Two Numbers
+
+```python
+```
+---
+
+# 73. Remove Nth Node From End Of List
+
+```python
+```
+---
+
+# 74. Sort List
+
+```python
+```
+---
+# 75. Reorder List
+
+```python
+```
+---
+# 76. Clone Graph
+
+```python
+```
+---
+# 77. Pacific Atlantic Water Flow
+
+```python
+```
+---
+# 78. Number of Islands
+
+```python
+```
+---
+# 79. Reverse Linked List II
+
+```python
+```
+---
+# 80. Rotate List
+
+```python
+```
+---
+# 81. Swap Nodes in Pairs
+
+```python
+```
+---
+# 82. Odd Even Linked List
+
+```python
+```
+---
+# 83. Kth Smallest Element in a Sorted Matrix
+
+```python
+```
+---
+# 84. Find K Pairs with Smallest Sums
+
+```python
+```
+---
+# 85. Merge Intervals
+
+```python
+```
+---
+# 86. Interval List Intersections
+
+```python
+```
+---
+# 87. Non-overlapping Intervals
+
+```python
+```
+---
+# 88. Task Scheduler
+
+```python
+```
+---
+# 89. Minimum Number of Arrows to Burst Balloons
+
+```python
+```
+---
+# 90. Insert Interval
+
+```python
+```
+---
+# 91. Find Minimum in Rotated Sorted Array
+
+```python
+```
+---
+# 92. Find Peak Element
+
+```python
+```
+---
+# 93. Search in Rotated Sorted Array
+
+```python
+```
+---
+# 94. 	Search in Rotated Sorted Array II
+
+```python
+```
+---
+# 95. 	Search a 2D Matrix
+
+```python
+```
+---
+# 96. Search a 2D Matrix II
+
+```python
+```
+---
+# 97. Find K Closest Elements
+
+```python
+```
+---
+# 98. 	Minimum Size Subarray Sum
+
+```python
+```
+---
+# 99. 	Fruit Into Baskets
+
+```python
+```
+---
+# 100. 	Permutation in String
+
+```python
+```
+---
+# 101. Longest Repeating Character Replacement
+
+```python
+```
+---
+# 102. 	Longest Substring Without Repeating Characters
+
+```python
+```
+---
+# 103. 	Kth Smallest Element in a BST
+
+```python
+```
+---
+# 104. 	K Closest Points to Origin
+
+```python
+```
+---
+# 105. 	Top K Frequent Elements
+
+```python
+```
+---
+# 106. Sort Characters By Frequency
+
+```python
+```
+---
+# 107. 	Kth Largest Element in an Array
+
+```python
+```
+---
+# 108. 	Reorganize String 
+
+```python
+```
+---
+# 109. 	Course Schedule
+
+```python
+```
+---
+# 110. Course Schedule II
+
+```python
+```
+---
+# 111. 	Minimum Height Trees
+
+```python
+```
+---
+# 112. Sort List
+
+```python
+```
+---
+# 113. Binary Tree Level Order Traversal II
+
+```python
+```
+---
+# 114. Binary Tree Level Order Traversal
+
+```python
+```
+---
+# 115. Binary Tree Zigzag Level Order Traversal
+
+```python
+```
+---
+# 116. Populating Next Right Pointers in Each Node
+
+```python
+```
+---
+# 117. 	Populating Next Right Pointers in Each Node II
+
+```python
+```
+---
+# 118. 	Binary Tree Right Side View
+
+```python
+```
+---
+# 119. 	All Nodes Distance K in Binary Tree
+
+```python
+```
+---
+# 120. 	Path Sum II
+
+```python
+```
+---
+# 121. Path Sum III
+
+```python
+```
+---
+# 122. Lowest Common Ancestor of a Binary Tree
+
+```python
+```
+---
+# 123. 	Maximum Binary Tree
+
+```python
+```
+---
+# 124. 	Maximum Width of Binary Tree
+
+
+```python
+```
+---
+# 125. 	Construct Binary Tree from Preorder and Inorder Traversal
+
+```python
+```
+---
+# 126. 	Validate Binary Search Tree
+
+```python
+```
+---
+# 127. 	Implement Trie (Prefix Tree)
+
+```python
+```
+---
+# 128. 	3 Sum
+
+```python
+```
+---
+# 129. 3 Sum Closest
+
+```python
+```
+---
+# 130. 	Subarrays with Product Less than K
+
+```python
+```
+---
+# 131. 	Sort Colours
+
+```python
+```
+---
+# 132. Container With Most Water
+
+
+```python
+```
+---
+# 133. Longest Word in Dictionary
+
+
+```python
+```
+---
+# 134. Sort List
+
+```python
+```
+---
+# 135. 	Maximum XOR of Two Numbers in an Array
+
+```python
+```
+---
+# 136. 	First Missing Positive
+
+```python
+```
+---
+# 137. 	Sudoku Solver
+
+```python
+```
+---
+# 138. 	N-Queens
+
+```python
+```
+---
+# 139. 	Reverse Nodes in k-Group
+
+```python
+```
+---
+# 140. 	Merge k Sorted Lists
+
+```python
+```
+---
+# 141. 	Smallest Range Covering Elements from K Lists
+
+```python
+```
+---
+# 142. 	Count of Range Sum
+
+```python
+```
+---
+# 143. 	Sliding Window Maximum
+
+```python
+```
+---
+# 144. Minimum Number of K Consecutive Bit Flips
+
+```python
+```
+---
+# 145. 	Count Unique Characters of All Substrings of a Given String
+
+```python
+```
+---
+# 146. 	Minimum Window Substring
+
+```python
+```
+---
+# 147. 	Substring with Concatenation of All Words
+
+```python
+```
+---
+# 148. Course Schedule III
+
+```python
+```
+---
+# 149. Maximum Frequency Stack
+
+
+```python
+```
+---
+# 150. 	Binary Tree Maximum Path Sum
+
+```python
+```
+---
+# 151. 	Serialize and Deserialize Binary Tree
+
+```python
+```
+---
+# 152. Word Search II
+
+```python
+```
+---
+# 153. Find Median from Data Stream
+
+```python
+```
+---
+# 154. 	Sliding Window Median
+
+```python
+```
+---
+# 155. Trapping Rain Water
+
+
+```python
+```
+---
+# 156. 	Concatenated Words
+
+```python
+```
+---
+# 157. 	Prefix and Suffix Search
+
+```python
+```
+---
+# 158. 	Palindrome Pairs
+
+```python
+```
+---
+# 159. 	Sort Items by Groups Respecting Dependencies
+
+```python
+```
+---
+# 160. 	Median of Two Sorted Arrays
+
+```python
 ```
 ---
