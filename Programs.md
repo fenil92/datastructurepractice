@@ -2628,26 +2628,150 @@ class Solution:
 ```
 ---
 # 52. Target Sum
+You are given an integer array  `nums`  and an integer  `target`.
+
+You want to build an  **expression**  out of nums by adding one of the symbols  `'+'`  and  `'-'`  before each integer in nums and then concatenate all the integers.
+
+-   For example, if  `nums = [2, 1]`, you can add a  `'+'`  before  `2`  and a  `'-'`  before  `1`  and concatenate them to build the expression  `"+2-1"`.
+
+Return the number of different  **expressions**  that you can build, which evaluates to  `target`.
+
+**Example 1:**
+
+**Input:** nums = [1,1,1,1,1], target = 3
+**Output:** 5
+**Explanation:** There are 5 ways to assign symbols to make the sum of nums be target 3.
+-1 + 1 + 1 + 1 + 1 = 3
++1 - 1 + 1 + 1 + 1 = 3
++1 + 1 - 1 + 1 + 1 = 3
++1 + 1 + 1 - 1 + 1 = 3
++1 + 1 + 1 + 1 - 1 = 3
+
+**Example 2:**
+
+**Input:** nums = [1], target = 1
+**Output:** 1
+
+**Constraints:**
+
+-   `1 <= nums.length <= 20`
+-   `0 <= nums[i] <= 1000`
+-   `0 <= sum(nums[i]) <= 1000`
+-   `-1000 <= target <= 1000`
 
 ```python
 ```
 ---
 # 53. Palindrome Partitioning
+Given a string  `s`, partition  `s`  such that every substring of the partition is a  **palindrome**. Return all possible palindrome partitioning of  `s`.
+
+A  **palindrome**  string is a string that reads the same backward as forward.
+
+**Example 1:**
+
+**Input:** s = "aab"
+**Output:** [["a","a","b"],["aa","b"]]
+
+**Example 2:**
+
+**Input:** s = "a"
+**Output:** [["a"]]
+
+**Constraints:**
+
+-   `1 <= s.length <= 16`
+-   `s`  contains only lowercase English letters.
 
 ```python
 ```
 ---
 # 54. Letter Combinations of a Phone Number
 
+Given a string containing digits from  `2-9`  inclusive, return all possible letter combinations that the number could represent. Return the answer in  **any order**.
+
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+![](https://assets.leetcode.com/uploads/2022/03/15/1200px-telephone-keypad2svg.png)
+
+**Example 1:**
+
+**Input:** digits = "23"
+**Output:** ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+**Example 2:**
+
+**Input:** digits = ""
+**Output:** []
+
+**Example 3:**
+
+**Input:** digits = "2"
+**Output:** ["a","b","c"]
+
+**Constraints:**
+
+-   `0 <= digits.length <= 4`
+-   `digits[i]`  is a digit in the range  `['2', '9']`.
+
 ```python
 ```
 ---
 # 55. House Robber
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and  **it will automatically contact the police if two adjacent houses were broken into on the same night**.
+
+Given an integer array  `nums`  representing the amount of money of each house, return  _the maximum amount of money you can rob tonight  **without alerting the police**_.
+
+**Example 1:**
+
+**Input:** nums = [1,2,3,1]
+**Output:** 4
+**Explanation:** Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+
+**Example 2:**
+
+**Input:** nums = [2,7,9,3,1]
+**Output:** 12
+**Explanation:** Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+Total amount you can rob = 2 + 9 + 1 = 12.
+
+**Constraints:**
+
+-   `1 <= nums.length <= 100`
+-   `0 <= nums[i] <= 400`
+
 
 ```python
 ```
 ---
 # 56. House Robber II
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are  **arranged in a circle.**  That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and **it will automatically contact the police if two adjacent houses were broken into on the same night**.
+
+Given an integer array  `nums`  representing the amount of money of each house, return  _the maximum amount of money you can rob tonight  **without alerting the police**_.
+
+**Example 1:**
+
+**Input:** nums = [2,3,2]
+**Output:** 3
+**Explanation:** You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+
+**Example 2:**
+
+**Input:** nums = [1,2,3,1]
+**Output:** 4
+**Explanation:** Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+
+**Example 3:**
+
+**Input:** nums = [1,2,3]
+**Output:** 3
+
+**Constraints:**
+
+-   `1 <= nums.length <= 100`
+-   `0 <= nums[i] <= 1000`
 
 ```python
 ```
@@ -2655,18 +2779,94 @@ class Solution:
 
 # 57. Coin Change
 
+You are given an integer array  `coins`  representing coins of different denominations and an integer  `amount`  representing a total amount of money.
+
+Return  _the fewest number of coins that you need to make up that amount_. If that amount of money cannot be made up by any combination of the coins, return  `-1`.
+
+You may assume that you have an infinite number of each kind of coin.
+
+**Example 1:**
+
+**Input:** coins = [1,2,5], amount = 11
+**Output:** 3
+**Explanation:** 11 = 5 + 5 + 1
+
+**Example 2:**
+
+**Input:** coins = [2], amount = 3
+**Output:** -1
+
+**Example 3:**
+
+**Input:** coins = [1], amount = 0
+**Output:** 0
+
+**Constraints:**
+
+-   `1 <= coins.length <= 12`
+-   `1 <= coins[i] <= 231  - 1`
+-   `0 <= amount <= 104`
+
 ```python
 ```
 ---
 
 # 58. Maximum Product Subarray
 
+Given an integer array  `nums`, find a contiguous non-empty subarray within the array that has the largest product, and return  _the product_.
+
+The test cases are generated so that the answer will fit in a  **32-bit**  integer.
+
+A  **subarray**  is a contiguous subsequence of the array.
+
+**Example 1:**
+
+**Input:** nums = [2,3,-2,4]
+**Output:** 6
+**Explanation:** [2,3] has the largest product 6.
+
+**Example 2:**
+
+**Input:** nums = [-2,0,-1]
+**Output:** 0
+**Explanation:** The result cannot be 2, because [-2,-1] is not a subarray.
+
+**Constraints:**
+
+-   `1 <= nums.length <= 2 * 104`
+-   `-10 <= nums[i] <= 10`
+-   The product of any prefix or suffix of  `nums`  is  **guaranteed**  to fit in a  **32-bit**  integer.
 
 ```python
 ```
 ---
 
 # 59. Longest Increasing Subsequence
+
+Given an integer array  `nums`, return the length of the longest strictly increasing subsequence.
+
+A  **subsequence**  is a sequence that can be derived from an array by deleting some or no elements without changing the order of the remaining elements. For example,  `[3,6,2,7]`  is a subsequence of the array  `[0,3,1,6,2,2,7]`.
+
+**Example 1:**
+
+**Input:** nums = [10,9,2,5,3,7,101,18]
+**Output:** 4
+**Explanation:** The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+**Example 2:**
+
+**Input:** nums = [0,1,0,3,2,3]
+**Output:** 4
+
+**Example 3:**
+
+**Input:** nums = [7,7,7,7,7,7,7]
+**Output:** 1
+
+**Constraints:**
+
+-   `1 <= nums.length <= 2500`
+-   `-104  <= nums[i] <= 104`
 
 ```python
 ```
