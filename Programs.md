@@ -2124,6 +2124,8 @@ You must write an algorithm that runs in `O(n)` time.
 -   `0 <= nums.length <= 105`
 -   `-109  <= nums[i] <= 109`
 
+`LTM DP`
+
 ```python
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
@@ -2141,5 +2143,577 @@ class Solution:
                 longest = max(longest, l)
                 
         return longest
+```
+---
+# 42. Letter Case Permutation
+Given a string  `s`, you can transform every letter individually to be lowercase or uppercase to create another string.
+
+Return  _a list of all possible strings we could create_. Return the output in  **any order**.
+
+**Example 1:**
+
+**Input:** s = "a1b2"
+**Output:** ["a1b2","a1B2","A1b2","A1B2"]
+
+**Example 2:**
+
+**Input:** s = "3z4"
+**Output:** ["3z4","3Z4"]
+
+**Constraints:**
+
+-   `1 <= s.length <= 12`
+-   `s`  consists of lowercase English letters, uppercase English letters, and digits.
+
+```python
+
+
+```
+---
+# 43.  Subsets
+Given an integer array  `nums`  of  **unique**  elements, return  _all possible subsets (the power set)_.
+
+The solution set  **must not**  contain duplicate subsets. Return the solution in  **any order**.
+
+**Example 1:**
+
+**Input:** nums = [1,2,3]
+**Output:** [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+
+**Example 2:**
+
+**Input:** nums = [0]
+**Output:** [[],[0]]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 10`
+-   `-10 <= nums[i] <= 10`
+-   All the numbers of `nums`  are  **unique**.
+
+```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        # backtracking given [1,2,3]
+        '''
+            
+                        [1]                                    []
+                    
+                [1, 2]              [1]                 [2]            []
+                
+        [1,2,3]      [1,2]    [1, 3]    [1]         [2,3]   [2]      [3]    []   
+        
+        '''
+        res = []
+        subset = []
+            
+        def dfs(i):
+            if i >= len(nums):
+                res.append(subset.copy())
+                return
+            
+            # decision to include nums[i]
+            subset.append(nums[i])
+            dfs(i+1)
+            
+            # decision to not include nums[i]
+            subset.pop()
+            dfs(i+1)
+        
+        dfs(0)
+        return res
+            
+            
+            
+
+```
+---
+# 44. Subsets II
+
+Given an integer array  `nums`  that may contain duplicates, return  _all possible subsets (the power set)_.
+
+The solution set  **must not**  contain duplicate subsets. Return the solution in  **any order**.
+
+**Example 1:**
+
+**Input:** nums = [1,2,2]
+**Output:** [[],[1],[1,2],[1,2,2],[2],[2,2]]
+
+**Example 2:**
+
+**Input:** nums = [0]
+**Output:** [[],[0]]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 10`
+-   `-10 <= nums[i] <= 10`
+
+```python
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+         # backtracking given [1,2,2,,3]
+        '''
+            
+                        [1]                                         []
+                    
+                [1, 2]                  [1]                 [2]            []
+                
+        [1,2,2]         [1,2]      [1, 3]    [1]         [2,3]   [2]      [3]    []   
+        
+[1,2,2,3]  [1,2,2]  [1,2,3] [1,2]                                         
+        '''
+        res = []
+        nums.sort() #sorting is required so that duplicate elements remain close
+        
+        def backtrack(i, subset):
+            
+            if i >= len(nums):
+                res.append(subset[::]) #append a copy of subset
+                return
+            
+            # decision to include nums[i]
+            subset.append(nums[i])
+            backtrack(i+1, subset)
+            
+            subset.pop()
+            # decision to not include nums[i]
+            while i+1 < len(nums) and nums[i] == nums[i+1]:
+                i+=1  #skip duplicate
+            backtrack(i+1, subset)
+            
+        backtrack(0, [])
+        return res
+            
+                
+
+```
+----
+# 45. Permutations
+Given an array  `nums`  of distinct integers, return  _all the possible permutations_. You can return the answer in  **any order**.
+
+**Example 1:**
+
+**Input:** nums = [1,2,3]
+**Output:** [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+**Example 2:**
+
+**Input:** nums = [0,1]
+**Output:** [[0,1],[1,0]]
+
+**Example 3:**
+
+**Input:** nums = [1]
+**Output:** [[1]]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 6`
+-   `-10 <= nums[i] <= 10`
+-   All the integers of  `nums`  are  **unique**.
+
+```python
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        
+        # base case
+        if (len(nums) == 1):
+            return [nums[:]] #return list
+        
+        for i in range(len(nums)):
+             # Remove and store first element. Check permutation of remaining elements
+            n = nums.pop(0) #[1]
+            perms = self.permute(nums)
+            
+            #perms [2, 3], [3, 2]
+            for perm in perms:
+                # append popped element [2, 3, 1], [3, 2, 1]
+                perm.append(n)
+            result.extend(perms) # add it to result
+            nums.append(n) # add back popped element
+        
+        return result
+```
+---
+# 46. Permutations II
+
+Given a collection of numbers,  `nums`, that might contain duplicates, return  _all possible unique permutations  **in any order**._
+
+**Example 1:**
+
+**Input:** nums = [1,1,2]
+**Output:**
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+
+**Example 2:**
+
+**Input:** nums = [1,2,3]
+**Output:** [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 8`
+-   `-10 <= nums[i] <= 10`
+
+```python
+
+```
+---
+# 47. Combinations
+
+Given two integers  `n`  and  `k`, return  _all possible combinations of_  `k`  _numbers out of the range_  `[1, n]`.
+
+You may return the answer in  **any order**.
+
+**Example 1:**
+
+**Input:** n = 4, k = 2
+**Output:**
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+
+**Example 2:**
+
+**Input:** n = 1, k = 1
+**Output:** [[1]]
+
+**Constraints:**
+
+-   `1 <= n <= 20`
+-   `1 <= k <= n`
+
+```python
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+        
+        def backtrack(start, comb):
+            if len(comb) == k:
+                res.append(comb[::])
+                return
+            
+            for i in range(start, n+1):
+                comb.append(i)
+                backtrack(i+1, comb)
+                comb.pop()
+            
+        backtrack(1, [])
+        return res
+```
+---
+# 48. Combination Sum
+Given an array of  **distinct**  integers  `candidates`  and a target integer  `target`, return  _a list of all  **unique combinations**  of_ `candidates` _where the chosen numbers sum to_ `target`_._  You may return the combinations in  **any order**.
+
+The  **same**  number may be chosen from  `candidates`  an  **unlimited number of times**. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+
+It is  **guaranteed**  that the number of unique combinations that sum up to  `target`  is less than  `150`  combinations for the given input.
+
+**Example 1:**
+
+**Input:** candidates = [2,3,6,7], target = 7
+**Output:** [[2,2,3],[7]]
+**Explanation:**
+2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+
+**Example 2:**
+
+**Input:** candidates = [2,3,5], target = 8
+**Output:** [[2,2,2,2],[2,3,3],[3,5]]
+
+**Example 3:**
+
+**Input:** candidates = [2], target = 1
+**Output:** []
+
+**Constraints:**
+
+-   `1 <= candidates.length <= 30`
+-   `1 <= candidates[i] <= 200`
+-   All elements of  `candidates`  are  **distinct**.
+-   `1 <= target <= 500`
+
+```python
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        
+        def backtrack(i, curSum, comb):
+            # combination sum = target
+            if curSum == target:
+                res.append(comb[::])
+                return
+                
+            # outbound case
+            if curSum > target or i >= len(candidates):
+                return
+            
+            # decision to include candidates[i]
+            comb.append(candidates[i])
+            backtrack(i, curSum + candidates[i], comb)
+            comb.pop()
+            # decision to not include candidates[i]
+            backtrack(i+1, curSum, comb)
+        
+        backtrack(0, 0, [])
+        return res
+```
+---
+# 49. Combination Sum II
+
+Given a collection of candidate numbers (`candidates`) and a target number (`target`), find all unique combinations in  `candidates` where the candidate numbers sum to  `target`.
+
+Each number in  `candidates` may only be used  **once**  in the combination.
+
+**Note:** The solution set must not contain duplicate combinations.
+
+**Example 1:**
+
+**Input:** candidates = [10,1,2,7,6,1,5], target = 8
+**Output:** 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+
+**Example 2:**
+
+**Input:** candidates = [2,5,2,1,2], target = 5
+**Output:** 
+[
+[1,2,2],
+[5]
+]
+
+**Constraints:**
+
+-   `1 <= candidates.length <= 100`
+-   `1 <= candidates[i] <= 50`
+-   `1 <= target <= 30`
+
+```python
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        candidates.sort() # sorting to skip duplicates
+        
+        def backtrack(i, comb, total):
+            # base case
+            if total == target:
+                res.append(comb[::])
+                return
+            
+            # outbound case
+            if total > target or i >= len(candidates):
+                return
+            
+            # decision to include candidates[i]
+            comb.append(candidates[i])
+            backtrack(i+1, comb, total + candidates[i])
+            
+            comb.pop()
+            # skip duplicates
+            while (i + 1 < len(candidates)) and (candidates[i] == candidates[i+1]):
+                i+=1
+           
+            # decision to not include candidates[i]
+            backtrack(i+1, comb, total)
+                
+        backtrack(0, [], 0)
+        return res
+                
+            
+```
+---
+# 50. Combination Sum III
+Find all valid combinations of  `k`  numbers that sum up to  `n`  such that the following conditions are true:
+
+-   Only numbers  `1`  through  `9`  are used.
+-   Each number is used  **at most once**.
+
+Return  _a list of all possible valid combinations_. The list must not contain the same combination twice, and the combinations may be returned in any order.
+
+**Example 1:**
+
+**Input:** k = 3, n = 7
+**Output:** [[1,2,4]]
+**Explanation:**
+1 + 2 + 4 = 7
+There are no other valid combinations.
+
+**Example 2:**
+
+**Input:** k = 3, n = 9
+**Output:** [[1,2,6],[1,3,5],[2,3,4]]
+**Explanation:**
+1 + 2 + 6 = 9
+1 + 3 + 5 = 9
+2 + 3 + 4 = 9
+There are no other valid combinations.
+
+**Example 3:**
+
+**Input:** k = 4, n = 1
+**Output:** []
+**Explanation:** There are no valid combinations.
+Using 4 different numbers in the range [1,9], the smallest sum we can get is 1+2+3+4 = 10 and since 10 > 1, there are no valid combination.
+
+**Constraints:**
+
+-   `2 <= k <= 9`
+-   `1 <= n <= 60`
+
+```python
+
+```
+---
+# 51. Generate Parentheses
+Given  `n`  pairs of parentheses, write a function to  _generate all combinations of well-formed parentheses_.
+
+**Example 1:**
+
+**Input:** n = 3
+**Output:** ["((()))","(()())","(())()","()(())","()()()"]
+
+**Example 2:**
+
+**Input:** n = 1
+**Output:** ["()"]
+
+**Constraints:**
+
+-   `1 <= n <= 8`
+
+```python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        # if open = N, we cannot add open
+        # if close < open, then add close
+        
+        res = []
+        stack = []
+        
+        def backtrack(open, close):
+            if open == close == n:
+                res.append("".join(stack))
+                return
+            
+            if open < n:
+                stack.append("(")
+                backtrack(open + 1, close)
+                stack.pop()
+                
+            if close < open:
+                stack.append(")")
+                backtrack(open, close+1)
+                stack.pop()
+                
+        backtrack(0,0)
+        return res
+                
+            
+```
+---
+---
+#  60. Longest Palindromic Substring
+Given a string  `s`, return  _the longest palindromic substring_  in  `s`.
+
+**Example 1:**
+
+**Input:** s = "babad"
+**Output:** "bab"
+**Explanation:** "aba" is also a valid answer.
+
+**Example 2:**
+
+**Input:** s = "cbbd"
+**Output:** "bb"
+
+**Constraints:**
+
+-   `1 <= s.length <= 1000`
+-   `s`  consist of only digits and English letters.
+
+`LTM DP`
+```python
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        longest = 0
+        longestStr = ""
+        
+        for i in range(len(s)):
+                # odd length
+                l , r = i, i
+                while(l >= 0 and r < len(s) and s[l]==s[r]):
+                    if(r-l+1 > longest):
+                        longest  = r-l+1
+                        longestStr = s[l:r+1]
+
+                    l-=1
+                    r+=1
+                    
+                 # even length
+                l , r = i, i+1
+                while(l >= 0 and r < len(s) and s[l]==s[r]):
+                    if(r-l+1 > longest):
+                        longest  = r-l+1
+                        longestStr = s[l:r+1]
+
+                    l-=1
+                    r+=1
+                
+        return longestStr
+                
+            
+        
+```
+---
+# 61.  Word Break
+
+Given a string  `s`  and a dictionary of strings  `wordDict`, return  `true`  if  `s`  can be segmented into a space-separated sequence of one or more dictionary words.
+
+**Note**  that the same word in the dictionary may be reused multiple times in the segmentation.
+
+**Example 1:**
+
+**Input:** s = "leetcode", wordDict = ["leet","code"]
+**Output:** true
+**Explanation:** Return true because "leetcode" can be segmented as "leet code".
+
+**Example 2:**
+
+**Input:** s = "applepenapple", wordDict = ["apple","pen"]
+**Output:** true
+**Explanation:** Return true because "applepenapple" can be segmented as "apple pen apple".
+Note that you are allowed to reuse a dictionary word.
+
+**Example 3:**
+
+**Input:** s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+**Output:** false
+
+**Constraints:**
+
+-   `1 <= s.length <= 300`
+-   `1 <= wordDict.length <= 1000`
+-   `1 <= wordDict[i].length <= 20`
+-   `s`  and  `wordDict[i]`  consist of only lowercase English letters.
+-   All the strings of  `wordDict`  are  **unique**.
+
+```python
+
 ```
 ---
