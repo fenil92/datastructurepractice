@@ -2714,6 +2714,35 @@ A mapping of digits to letters (just like on the telephone buttons) is given bel
 -   `digits[i]`  is a digit in the range  `['2', '9']`.
 
 ```python
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        phone_letters = {"2": "abc", 
+                         "3": "def", 
+                         "4": "ghi", 
+                         "5": "jkl", 
+                         "6": "mno", 
+                         "7": "pqrs", 
+                         "8": "tuv", 
+                         "9": "wxyz"}
+        
+        res = []
+        
+        def backTrack(i, curStr):
+            if(len(curStr) == len(digits)):
+                res.append(curStr)
+                return
+            
+            for c in phone_letters[digits[i]]:
+                backTrack(i+1, curStr+c)
+                
+        
+        if digits:
+            backTrack(0, "")
+            
+        return res         
+        
+                
+
 ```
 ---
 # 55. House Robber
@@ -2742,6 +2771,19 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 
 
 ```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        #dynamic programming
+        rob1, rob2 = 0, 0
+        
+        # [rob1, rob2, n, n+1, ...]
+        for n in nums:
+            newRob = max(rob1 + n, rob2)
+            rob1 = rob2
+            rob2 = newRob
+        
+        return rob2
+
 ```
 ---
 # 56. House Robber II
@@ -2774,6 +2816,23 @@ Total amount you can rob = 1 + 3 = 4.
 -   `0 <= nums[i] <= 1000`
 
 ```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        # max of only house or skipping first house or skipping last house
+        return max(nums[0], self.helper(nums[1:]), self.helper(nums[:-1]))
+    
+    
+    #helper function equivalent to house rob
+    def helper(self, nums):
+        rob1, rob2 = 0, 0
+        
+        for n in nums:
+            newRob = max(rob1+n, rob2)
+            rob1 = rob2
+            rob2 = newRob
+        
+        return rob2
+
 ```
 ---
 
@@ -2808,6 +2867,18 @@ You may assume that you have an infinite number of each kind of coin.
 -   `0 <= amount <= 104`
 
 ```python
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # dynamic programming bottom up approach using memoization
+        dp = [amount+1] * (amount+1) # array size equivalent to amount+1 and value initialized to max value which can be infinite but here we have used amount + 1
+        dp[0] = 0
+        
+        for a in range(1, amount+1):
+            for c in coins:
+                if a - c >=0:
+                    dp[a] = min(dp[a] ,1+ dp[a-c])
+        
+        return dp[amount] if dp[amount] != amount+1 else -1
 ```
 ---
 
@@ -2838,6 +2909,19 @@ A  **subarray**  is a contiguous subsequence of the array.
 -   The product of any prefix or suffix of  `nums`  is  **guaranteed**  to fit in a  **32-bit**  integer.
 
 ```python
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        res = max(nums)
+        curMin, curMax = 1, 1
+        
+        for n in nums:
+            tmp = curMax * n
+            curMax = max(curMax * n, curMin * n, n)
+            curMin = min(tmp, curMin * n, n)
+            res = max(curMax, res, curMin)
+        
+        return res
 ```
 ---
 
