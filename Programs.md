@@ -1803,7 +1803,26 @@ You must solve the problem  **without**  modifying the array  `nums` and uses on
 -   Can you solve the problem in linear runtime complexity?
 
 ```python
-code here
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        # Easy way to solve this problem is by using frequency counter dictionary or set but that requires O(n) space
+        # However, since it is asked to solve it using O(1) space, we can use Floyd/cycle detection algo to solve this
+        
+        slow, fast = 0, 0
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            
+            if slow == fast:
+                break
+                
+        slow2 = 0
+        while True:
+            slow = nums[slow]
+            slow2 = nums[slow2]
+            if slow == slow2:
+                return slow
+                    
 ```
 ---
 # 36. Find All Duplicates in an Array
@@ -1834,7 +1853,20 @@ You must write an algorithm that runs in `O(n)` time and uses only constant extr
 -   Each element in  `nums`  appears  **once**  or  **twice**.
 
 ```python
-code here
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        res = []
+        
+        for n in nums:
+            m = abs(n)
+            
+            # if negative element appears that means it is seen before
+            if nums[m-1] < 0:
+                res.append(m)
+            else:
+                nums[m-1] *= -1 # mark the element as negative
+        
+        return res
 
 ```
 ---
@@ -2166,7 +2198,23 @@ Return  _a list of all possible strings we could create_. Return the output in  
 -   `s`  consists of lowercase English letters, uppercase English letters, and digits.
 
 ```python
-
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        res = [""]
+        
+        for c in s:
+            temp = []
+            if c.isalpha():
+                for o in res:
+                    temp.append(o+c.lower())
+                    temp.append(o+c.upper())
+            else:
+                for o in res:
+                    temp.append(o+c)
+            
+            res = temp
+            #print(temp, res)
+        return res
 
 ```
 ---
@@ -2660,6 +2708,23 @@ Return the number of different  **expressions**  that you can build, which evalu
 -   `-1000 <= target <= 1000`
 
 ```python
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        dp = {}  # (index, total) => hash map to store no of ways the target is reached
+        
+        def backtrack(i, total):
+            if i == len(nums):
+                return 1 if total == target else 0
+            
+            if (i , total) in dp:
+                return dp[(i, total)]
+            
+            dp[(i, total)] = (backtrack(i+1, total + nums[i]) +
+                             backtrack(i+1, total - nums[i]))
+            
+            return dp[(i, total)]
+        
+        return backtrack(0, 0)
 ```
 ---
 # 53. Palindrome Partitioning
@@ -2953,6 +3018,17 @@ A  **subsequence**  is a sequence that can be derived from an array by deleting 
 -   `-104  <= nums[i] <= 104`
 
 ```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        LIS = [1] * len(nums)
+        
+        for i in range(len(nums)-1, -1, -1):
+            for j in range(i+1, len(nums)):
+                #print(i, j, nums[i], nums[j], LIS)
+                if nums[i] < nums[j]:
+                    LIS[i] = max(1 + LIS[j], LIS[i])
+                    
+        return max(LIS)
 ```
 ---
 ---
