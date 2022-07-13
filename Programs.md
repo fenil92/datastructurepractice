@@ -2408,7 +2408,31 @@ Given a collection of numbers,  `nums`, that might contain duplicates, return  _
 -   `-10 <= nums[i] <= 10`
 
 ```python
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        perm = []
+        count = { n: 0 for n in nums}
+        for n in nums:
+            count[n] +=1
+            
+        def dfs():
+            if len(perm) == len(nums):
+                res.append(perm.copy())
+                return
+            
+            for n in count:
+                if count[n] > 0:
+                    perm.append(n)
+                    count[n] -=1
+                
+                    dfs()
 
+                    count[n]+=1
+                    perm.pop()
+                
+        dfs()
+        return res
 ```
 ---
 # 47. Combinations
@@ -2748,6 +2772,33 @@ A  **palindrome**  string is a string that reads the same backward as forward.
 -   `s`  contains only lowercase English letters.
 
 ```python
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        part = []
+        
+        def dfs(i):
+            if i >= len(s):
+                res.append(part.copy())
+                return
+            
+            for k in range(i, len(s)):
+                if self.isPalindrome(s, i, k):
+                    part.append(s[i: k+1])
+                    dfs(k+1)
+                    part.pop()
+                    
+        dfs(0)
+        return res
+    
+    def isPalindrome(self, s, l, r):
+        while l < r:
+            if s[l] != s[r]:
+                return False
+            l, r = l+1, r-1
+        
+        return True
+                    
 ```
 ---
 # 54. Letter Combinations of a Phone Number
