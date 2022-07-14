@@ -2649,7 +2649,31 @@ Using 4 different numbers in the range [1,9], the smallest sum we can get is 1+2
 -   `1 <= n <= 60`
 
 ```python
-
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res = []
+        
+        def backtrack(i, curSum, comb):
+            
+            if len(comb) == k:
+                # combination sum = target
+                if curSum == n:
+                    res.append(comb[::])
+                    return
+            
+            # recursion
+            for j in range(i, 9+1):
+                # outbound case
+                if curSum > n:
+                    return
+                
+                comb.append(j)
+                backtrack(j+1, curSum + j, comb)
+                comb.pop()
+               
+        
+        backtrack(1, 0, [])
+        return res
 ```
 ---
 # 51. Generate Parentheses
@@ -3169,7 +3193,28 @@ Note that you are allowed to reuse a dictionary word.
 -   All the strings of  `wordDict`  are  **unique**.
 
 ```python
-
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        # dynamic programming
+        dp = [False] * (len(s)+1)
+        dp[len(s)] = True
+        '''
+            dp[8] = false
+            dp[7] = false
+            dp[6] = dp[5] = false
+            dp[4] = true ("code" matches)
+            dp[3] = dp[2] =dp[1] = false
+            dp[0] = dp[0 + len(w)] = dp[4]
+        '''
+        for i in range(len(s)-1, -1, -1):
+            for w in wordDict:
+                #print(dp, w)
+                if (i+ len(w)) <= len(s) and s[i: i+ len(w)] == w:
+                    dp[i] = dp[i+len(w)]
+                if dp[i]:
+                    break
+                
+        return dp[0]        
 ```
 ---
 # 62. Combination Sum IV
@@ -3343,12 +3388,12 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 94. 	Search in Rotated Sorted Array II
+# 94. Search in Rotated Sorted Array II
 
 ```python
 ```
 ---
-# 95. 	Search a 2D Matrix
+# 95. Search a 2D Matrix
 
 ```python
 ```
@@ -3363,17 +3408,17 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 98. 	Minimum Size Subarray Sum
+# 98. Minimum Size Subarray Sum
 
 ```python
 ```
 ---
-# 99. 	Fruit Into Baskets
+# 99. Fruit Into Baskets
 
 ```python
 ```
 ---
-# 100. 	Permutation in String
+# 100. Permutation in String
 
 ```python
 ```
@@ -3383,22 +3428,22 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 102. 	Longest Substring Without Repeating Characters
+# 102. Longest Substring Without Repeating Characters
 
 ```python
 ```
 ---
-# 103. 	Kth Smallest Element in a BST
+# 103. Kth Smallest Element in a BST
 
 ```python
 ```
 ---
-# 104. 	K Closest Points to Origin
+# 104. K Closest Points to Origin
 
 ```python
 ```
 ---
-# 105. 	Top K Frequent Elements
+# 105. Top K Frequent Elements
 
 ```python
 ```
@@ -3408,17 +3453,17 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 107. 	Kth Largest Element in an Array
+# 107. Kth Largest Element in an Array
 
 ```python
 ```
 ---
-# 108. 	Reorganize String 
+# 108. Reorganize String 
 
 ```python
 ```
 ---
-# 109. 	Course Schedule
+# 109. Course Schedule
 
 ```python
 ```
@@ -3428,7 +3473,7 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 111. 	Minimum Height Trees
+# 111. Minimum Height Trees
 
 ```python
 ```
@@ -3458,22 +3503,22 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 117. 	Populating Next Right Pointers in Each Node II
+# 117. Populating Next Right Pointers in Each Node II
 
 ```python
 ```
 ---
-# 118. 	Binary Tree Right Side View
+# 118. Binary Tree Right Side View
 
 ```python
 ```
 ---
-# 119. 	All Nodes Distance K in Binary Tree
+# 119. All Nodes Distance K in Binary Tree
 
 ```python
 ```
 ---
-# 120. 	Path Sum II
+# 120. Path Sum II
 
 ```python
 ```
@@ -3488,33 +3533,33 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 123. 	Maximum Binary Tree
+# 123. Maximum Binary Tree
 
 ```python
 ```
 ---
-# 124. 	Maximum Width of Binary Tree
+# 124. Maximum Width of Binary Tree
 
 
 ```python
 ```
 ---
-# 125. 	Construct Binary Tree from Preorder and Inorder Traversal
+# 125. Construct Binary Tree from Preorder and Inorder Traversal
 
 ```python
 ```
 ---
-# 126. 	Validate Binary Search Tree
+# 126. Validate Binary Search Tree
 
 ```python
 ```
 ---
-# 127. 	Implement Trie (Prefix Tree)
+# 127. Implement Trie (Prefix Tree)
 
 ```python
 ```
 ---
-# 128. 	3 Sum
+# 128. 3 Sum
 
 ```python
 ```
@@ -3524,12 +3569,12 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 130. 	Subarrays with Product Less than K
+# 130. Subarrays with Product Less than K
 
 ```python
 ```
 ---
-# 131. 	Sort Colours
+# 131. Sort Colours
 
 ```python
 ```
@@ -3551,47 +3596,47 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 135. 	Maximum XOR of Two Numbers in an Array
+# 135. Maximum XOR of Two Numbers in an Array
 
 ```python
 ```
 ---
-# 136. 	First Missing Positive
+# 136. First Missing Positive
 
 ```python
 ```
 ---
-# 137. 	Sudoku Solver
+# 137. Sudoku Solver
 
 ```python
 ```
 ---
-# 138. 	N-Queens
+# 138. N-Queens
 
 ```python
 ```
 ---
-# 139. 	Reverse Nodes in k-Group
+# 139. Reverse Nodes in k-Group
 
 ```python
 ```
 ---
-# 140. 	Merge k Sorted Lists
+# 140. Merge k Sorted Lists
 
 ```python
 ```
 ---
-# 141. 	Smallest Range Covering Elements from K Lists
+# 141. Smallest Range Covering Elements from K Lists
 
 ```python
 ```
 ---
-# 142. 	Count of Range Sum
+# 142. Count of Range Sum
 
 ```python
 ```
 ---
-# 143. 	Sliding Window Maximum
+# 143. Sliding Window Maximum
 
 ```python
 ```
@@ -3601,17 +3646,17 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 145. 	Count Unique Characters of All Substrings of a Given String
+# 145. Count Unique Characters of All Substrings of a Given String
 
 ```python
 ```
 ---
-# 146. 	Minimum Window Substring
+# 146. Minimum Window Substring
 
 ```python
 ```
 ---
-# 147. 	Substring with Concatenation of All Words
+# 147. Substring with Concatenation of All Words
 
 ```python
 ```
@@ -3627,12 +3672,12 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 150. 	Binary Tree Maximum Path Sum
+# 150. Binary Tree Maximum Path Sum
 
 ```python
 ```
 ---
-# 151. 	Serialize and Deserialize Binary Tree
+# 151. Serialize and Deserialize Binary Tree
 
 ```python
 ```
@@ -3647,7 +3692,7 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 154. 	Sliding Window Median
+# 154. Sliding Window Median
 
 ```python
 ```
@@ -3658,27 +3703,27 @@ Note that you are allowed to reuse a dictionary word.
 ```python
 ```
 ---
-# 156. 	Concatenated Words
+# 156. Concatenated Words
 
 ```python
 ```
 ---
-# 157. 	Prefix and Suffix Search
+# 157. Prefix and Suffix Search
 
 ```python
 ```
 ---
-# 158. 	Palindrome Pairs
+# 158. Palindrome Pairs
 
 ```python
 ```
 ---
-# 159. 	Sort Items by Groups Respecting Dependencies
+# 159. Sort Items by Groups Respecting Dependencies
 
 ```python
 ```
 ---
-# 160. 	Median of Two Sorted Arrays
+# 160. Median of Two Sorted Arrays
 
 ```python
 ```
