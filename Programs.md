@@ -6,16 +6,19 @@ Given an integer array  `nums`, return  `true`  if any value appears  **at least
 **Example 1:**
 
 **Input:** nums = [1,2,3,1]
+
 **Output:** true
 
 **Example 2:**
 
 **Input:** nums = [1,2,3,4]
+
 **Output:** false
 
 **Example 3:**
 
 **Input:** nums = [1,1,1,3,3,4,3,2,4,2]
+
 **Output:** true
 
 **Constraints:**
@@ -45,19 +48,25 @@ Given an array  `nums`  containing  `n`  distinct numbers in the range  `[0, n]`
 **Example 1:**
 
 **Input:** nums = [3,0,1]
+
 **Output:** 2
+
 **Explanation:** n = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 2 is the missing number in the range since it does not appear in nums.
 
 **Example 2:**
 
 **Input:** nums = [0,1]
+
 **Output:** 2
+
 **Explanation:** n = 2 since there are 2 numbers, so all numbers are in the range [0,2]. 2 is the missing number in the range since it does not appear in nums.
 
 **Example 3:**
 
 **Input:** nums = [9,6,4,2,3,5,7,0,1]
+
 **Output:** 8
+
 **Explanation:** n = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number in the range since it does not appear in nums.
 
 **Constraints:**
@@ -2392,6 +2401,7 @@ Given a collection of numbers,  `nums`, that might contain duplicates, return  _
 **Example 1:**
 
 **Input:** nums = [1,1,2]
+
 **Output:**
 [[1,1,2],
  [1,2,1],
@@ -2400,6 +2410,7 @@ Given a collection of numbers,  `nums`, that might contain duplicates, return  _
 **Example 2:**
 
 **Input:** nums = [1,2,3]
+
 **Output:** [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
 **Constraints:**
@@ -2629,7 +2640,9 @@ There are no other valid combinations.
 **Example 2:**
 
 **Input:** k = 3, n = 9
+
 **Output:** [[1,2,6],[1,3,5],[2,3,4]]
+
 **Explanation:**
 1 + 2 + 6 = 9
 1 + 3 + 5 = 9
@@ -2639,7 +2652,9 @@ There are no other valid combinations.
 **Example 3:**
 
 **Input:** k = 4, n = 1
+
 **Output:** []
+
 **Explanation:** There are no valid combinations.
 Using 4 different numbers in the range [1,9], the smallest sum we can get is 1+2+3+4 = 10 and since 10 > 1, there are no valid combination.
 
@@ -2735,7 +2750,9 @@ Return the number of different  **expressions**  that you can build, which evalu
 **Example 1:**
 
 **Input:** nums = [1,1,1,1,1], target = 3
+
 **Output:** 5
+
 **Explanation:** There are 5 ways to assign symbols to make the sum of nums be target 3.
 -1 + 1 + 1 + 1 + 1 = 3
 +1 - 1 + 1 + 1 + 1 = 3
@@ -2746,6 +2763,7 @@ Return the number of different  **expressions**  that you can build, which evalu
 **Example 2:**
 
 **Input:** nums = [1], target = 1
+
 **Output:** 1
 
 **Constraints:**
@@ -3218,44 +3236,341 @@ class Solution:
 ```
 ---
 # 62. Combination Sum IV
+Given an array of  **distinct**  integers  `nums`  and a target integer  `target`, return  _the number of possible combinations that add up to_ `target`.
 
+The test cases are generated so that the answer can fit in a  **32-bit**  integer.
+
+**Example 1:**
+
+**Input:** nums = [1,2,3], target = 4
+**Output:** 7
+**Explanation:**
+The possible combination ways are:
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+Note that different sequences are counted as different combinations.
+
+**Example 2:**
+
+**Input:** nums = [9], target = 3
+**Output:** 0
+
+**Constraints:**
+
+-   `1 <= nums.length <= 200`
+-   `1 <= nums[i] <= 1000`
+-   All the elements of  `nums`  are  **unique**.
+-   `1 <= target <= 1000`
+
+**Follow up:**  What if negative numbers are allowed in the given array? How does it change the problem? What limitation we need to add to the question to allow negative numbers?
 ```python
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        dp = {0: 1}
+        # dp[target] = dp[target - (each of the element of nums)]
+        # dp[4] = dp[4-1] + dp[4-2] + dp[4-3]
+        for total in range(1, target+1):
+            dp[total] = 0
+            for n in nums:
+                dp[total] += dp.get(total - n,0)
+                #print(dp, n, total)
+
+        
+        return dp[target]
 ```
 ---
 
 # 63. Decode Ways
 
+A message containing letters from  `A-Z`  can be  **encoded**  into numbers using the following mapping:
+
+'A' -> "1"
+'B' -> "2"
+...
+'Z' -> "26"
+
+To  **decode**  an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways). For example,  `"11106"`  can be mapped into:
+
+-   `"AAJF"`  with the grouping  `(1 1 10 6)`
+-   `"KJF"`  with the grouping  `(11 10 6)`
+
+Note that the grouping  `(1 11 06)`  is invalid because  `"06"`  cannot be mapped into  `'F'`  since  `"6"`  is different from  `"06"`.
+
+Given a string  `s`  containing only digits, return  _the  **number**  of ways to  **decode**  it_.
+
+The test cases are generated so that the answer fits in a  **32-bit**  integer.
+
+**Example 1:**
+
+**Input:** s = "12"
+**Output:** 2
+**Explanation:** "12" could be decoded as "AB" (1 2) or "L" (12).
+
+**Example 2:**
+
+**Input:** s = "226"
+**Output:** 3
+**Explanation:** "226" could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+
+**Example 3:**
+
+**Input:** s = "06"
+**Output:** 0
+**Explanation:** "06" cannot be mapped to "F" because of the leading zero ("6" is different from "06").
+
+**Constraints:**
+
+-   `1 <= s.length <= 100`
+-   `s`  contains only digits and may contain leading zero(s).
 ```python
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        dp = {len(s): 1}
+        
+        def dfs(i):
+            if i in dp:
+                return dp[i]
+            if s[i] == "0":
+                return 0
+            
+            res = dfs(i+1)
+            if i+1 < len(s) and int(s[i] + s[i+1]) < 27:
+                res += dfs(i+2)
+            
+            dp[i] = res
+            return res
+        
+        return dfs(0)
 ```
+
 ---
 
 # 64. Unique Paths
 
+There is a robot on an  `m x n`  grid. The robot is initially located at the  **top-left corner**  (i.e.,  `grid[0][0]`). The robot tries to move to the  **bottom-right corner**  (i.e.,  `grid[m - 1][n - 1]`). The robot can only move either down or right at any point in time.
+
+Given the two integers  `m`  and  `n`, return  _the number of possible unique paths that the robot can take to reach the bottom-right corner_.
+
+The test cases are generated so that the answer will be less than or equal to  `2 * 109`.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
+
+**Input:** m = 3, n = 7
+**Output:** 28
+
+**Example 2:**
+
+**Input:** m = 3, n = 2
+**Output:** 3
+**Explanation:** From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Down -> Down
+2. Down -> Down -> Right
+3. Down -> Right -> Down
+
+**Constraints:**
+
+-   `1 <= m, n <= 100`
+
+
 ```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        row = [1] * n
+       
+        for i in range(m -1):
+            newRow = [1] * n
+            for j in range(n-2, -1, -1):
+                newRow[j] = newRow[j+1] + row[j]
+                
+            row = newRow
+            
+        return row[0]
 ```
 ---
 
 # 65. Jump Game
 
+You are given an integer array  `nums`. You are initially positioned at the array's  **first index**, and each element in the array represents your maximum jump length at that position.
+
+Return  `true` _if you can reach the last index, or_ `false` _otherwise_.
+
+**Example 1:**
+
+**Input:** nums = [2,3,1,1,4]
+**Output:** true
+**Explanation:** Jump 1 step from index 0 to 1, then 3 steps to the last index.
+
+**Example 2:**
+
+**Input:** nums = [3,2,1,0,4]
+**Output:** false
+**Explanation:** You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+
+**Constraints:**
+
+-   `1 <= nums.length <= 104`
+-   `0 <= nums[i] <= 105`
+
 ```python
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        # start from last index and keep on changing the goal post. This is based on greedy approach. It can also be solved using dynamic programming but it will take O(n*n) time.
+        
+        goal = len(nums)-1
+        
+        for i in range(len(nums)-1, -1, -1):
+            if i + nums[i] >= goal:
+                goal = i
+            
+        return True if goal == 0 else False
 ```
 ---
 
 # 66. Palindromic Substrings
 
+Given a string  `s`, return  _the number of  **palindromic substrings**  in it_.
+
+A string is a  **palindrome**  when it reads the same backward as forward.
+
+A  **substring**  is a contiguous sequence of characters within the string.
+
+**Example 1:**
+
+**Input:** s = "abc"
+**Output:** 3
+**Explanation:** Three palindromic strings: "a", "b", "c".
+
+**Example 2:**
+
+**Input:** s = "aaa"
+**Output:** 6
+**Explanation:** Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+
+**Constraints:**
+
+-   `1 <= s.length <= 1000`
+-   `s`  consists of lowercase English letters.
+
 ```python
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        # count palindrome starting at odd position + count of palindrome starting at even position
+        res =  0
+        
+        for i in range(len(s)):
+            l = r = i # odd count
+            
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                res+=1
+                l-=1
+                r+=1
+        
+            # even count
+            l = i
+            r = i +1
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                res+=1
+                l-=1
+                r+=1
+            
+        return res
 ```
 ---
 
 # 67. Number of Longest Increasing Subsequence
+Given an integer array `nums`, return  _the number of longest increasing subsequences._
 
+**Notice**  that the sequence has to be  **strictly**  increasing.
+
+**Example 1:**
+
+**Input:** nums = [1,3,5,4,7]
+**Output:** 2
+**Explanation:** The two longest increasing subsequences are [1, 3, 4, 7] and [1, 3, 5, 7].
+
+**Example 2:**
+
+**Input:** nums = [2,2,2,2,2]
+**Output:** 5
+**Explanation:** The length of the longest increasing subsequence is 1, and there are 5 increasing subsequences of length 1, so output 5.
+
+**Constraints:**
+
+-   `1 <= nums.length <= 2000`
+-   `-106  <= nums[i] <= 106`
 ```python
+class Solution:
+    def findNumberOfLIS(self, nums: List[int]) -> int:
+        dp = {} # key = index, value = [length of LIS, count]
+        lenLIS, res = 0, 0 # length of LIS, count of LIS
+        
+        for i in range(len(nums) -1, -1, -1):
+            maxLen, cntMax = 1, 1 # len, count of LIS starting from i
+            
+            for j in range(i+1, len(nums)):
+                if nums[j] > nums[i]: # make sure increasing order
+                    length, count = dp[j] # len, count of LIS staring from j
+                    if length + 1 > maxLen:
+                        maxLen , cntMax = length+1, count
+                    elif length + 1 == maxLen:
+                        cntMax += count
+            
+            if maxLen > lenLIS:
+                lenLIS, res = maxLen, cntMax
+            elif maxLen == lenLIS:
+                res += cntMax
+                
+            dp[i] = [maxLen, cntMax]
+            
+        return res
 ```
 ---
 
 # 68. Partition Equal Subset Sum
+Given a  **non-empty**  array  `nums`  containing  **only positive integers**, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
 
+**Example 1:**
+
+**Input:** nums = [1,5,11,5]
+**Output:** true
+**Explanation:** The array can be partitioned as [1, 5, 5] and [11].
+
+**Example 2:**
+
+**Input:** nums = [1,2,3,5]
+**Output:** false
+**Explanation:** The array cannot be partitioned into equal sum subsets.
+
+**Constraints:**
+
+-   `1 <= nums.length <= 200`
+-   `1 <= nums[i] <= 100`
 ```python
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        if sum(nums) % 2 == 1:
+            return False
+        
+        target = sum(nums)/2
+        dp = set()
+        dp.add(0)
+        
+        for i in range(len(nums)-1, -1, -1):
+            nextDP = set()
+            for t in dp:
+                nextDP.add(t + nums[i])
+                nextDP.add(t)
+            dp = nextDP
+        
+        return True if target in dp else False
+            
 ```
 ---
 
@@ -3271,14 +3586,131 @@ class Solution:
 ---
 
 # 71. Linked List Cycle II
+Given the  `head`  of a linked list, return  _the node where the cycle begins. If there is no cycle, return_ `null`.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the  `next`  pointer. Internally,  `pos`  is used to denote the index of the node that tail's  `next`  pointer is connected to (**0-indexed**). It is  `-1`  if there is no cycle.  **Note that**  `pos`  **is not passed as a parameter**.
+
+**Do not modify**  the linked list.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png)
+
+**Input:** head = [3,2,0,-4], pos = 1
+**Output:** tail connects to node index 1
+**Explanation:** There is a cycle in the linked list, where tail connects to the second node.
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png)
+
+**Input:** head = [1,2], pos = 0
+**Output:** tail connects to node index 0
+**Explanation:** There is a cycle in the linked list, where tail connects to the first node.
+
+**Example 3:**
+
+![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png)
+
+**Input:** head = [1], pos = -1
+**Output:** no cycle
+**Explanation:** There is no cycle in the linked list.
+
+**Constraints:**
+
+-   The number of the nodes in the list is in the range  `[0, 104]`.
+-   `-105  <= Node.val <= 105`
+-   `pos`  is  `-1`  or a  **valid index**  in the linked-list.
+
+**Follow up:**  Can you solve it using  `O(1)`  (i.e. constant) memory?
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        
+        if fast is None or fast.next is None:
+            return None
+    
+        fast = head
+        while fast:
+            if slow == fast:
+                return slow
+            slow = slow.next
+            fast = fast.next
+           
+           
+        return None
 ```
 ---
 
 # 72. Add Two Numbers
+You are given two  **non-empty**  linked lists representing two non-negative integers. The digits are stored in  **reverse order**, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg)
+
+**Input:** l1 = [2,4,3], l2 = [5,6,4]
+**Output:** [7,0,8]
+**Explanation:** 342 + 465 = 807.
+
+**Example 2:**
+
+**Input:** l1 = [0], l2 = [0]
+**Output:** [0]
+
+**Example 3:**
+
+**Input:** l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+**Output:** [8,9,9,9,0,0,0,1]
+
+**Constraints:**
+
+-   The number of nodes in each linked list is in the range  `[1, 100]`.
+-   `0 <= Node.val <= 9`
+-   It is guaranteed that the list represents a number that does not have leading zeros.
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
+        carry = 0
+        
+        while l1 or l2 or carry > 0:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            
+            # new digit
+            val = v1 + v2 + carry
+            carry = val // 10
+            val = val % 10
+            cur.next = ListNode(val)
+            
+            # update ptrs
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+            cur = cur.next
+            
+        return dummy.next
 ```
 ---
 
@@ -3289,8 +3721,82 @@ class Solution:
 ---
 
 # 74. Sort List
+Given the  `head`  of a linked list, return  _the list after sorting it in  **ascending order**_.
 
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg)
+
+**Input:** head = [4,2,1,3]
+**Output:** [1,2,3,4]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg)
+
+**Input:** head = [-1,5,3,4,0]
+**Output:** [-1,0,3,4,5]
+
+**Example 3:**
+
+**Input:** head = []
+**Output:** []
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[0, 5 * 104]`.
+-   `-105  <= Node.val <= 105`
+
+**Follow up:**  Can you sort the linked list in  `O(n logn)`  time and  `O(1)`  memory (i.e. constant space)?
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # merge sort
+        if not head or not head.next:
+            return head
+        
+        # split the list into two halves
+        left = head
+        right = self.getMid(head)
+        tmp = right.next
+        right.next = None
+        right = tmp
+        
+        # merge sort
+        left = self.sortList(left)
+        right = self.sortList(right)
+        return self.merge(left, right)
+    
+    def getMid(self, head):
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+    
+    def merge(self, list1, list2):
+        tail = dummy =  ListNode()
+        while list1 and list2:
+            if list1.val < list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
+        
+        if list1:
+            tail.next = list1
+        if list2:
+            tail.next = list2
+            
+        return dummy.next
+                
 ```
 ---
 # 75. Reorder List
@@ -3299,13 +3805,148 @@ class Solution:
 ```
 ---
 # 76. Clone Graph
+Given a reference of a node in a  **[connected](https://en.wikipedia.org/wiki/Connectivity_(graph_theory)#Connected_graph)**  undirected graph.
 
+Return a  [**deep copy**](https://en.wikipedia.org/wiki/Object_copying#Deep_copy)  (clone) of the graph.
+
+Each node in the graph contains a value (`int`) and a list (`List[Node]`) of its neighbors.
+
+class Node {
+    public int val;
+    public List<Node> neighbors;
+}
+
+**Test case format:**
+
+For simplicity, each node's value is the same as the node's index (1-indexed). For example, the first node with  `val == 1`, the second node with  `val == 2`, and so on. The graph is represented in the test case using an adjacency list.
+
+**An adjacency list**  is a collection of unordered  **lists**  used to represent a finite graph. Each list describes the set of neighbors of a node in the graph.
+
+The given node will always be the first node with  `val = 1`. You must return the  **copy of the given node**  as a reference to the cloned graph.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2019/11/04/133_clone_graph_question.png)
+
+**Input:** adjList = [[2,4],[1,3],[2,4],[1,3]]
+**Output:** [[2,4],[1,3],[2,4],[1,3]]
+**Explanation:** There are 4 nodes in the graph.
+1st node (val = 1)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).
+2nd node (val = 2)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
+3rd node (val = 3)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).
+4th node (val = 4)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/01/07/graph.png)
+
+**Input:** adjList = [[]]
+**Output:** [[]]
+**Explanation:** Note that the input contains one empty list. The graph consists of only one node with val = 1 and it does not have any neighbors.
+
+**Example 3:**
+
+**Input:** adjList = []
+**Output:** []
+**Explanation:** This an empty graph, it does not have any nodes.
+
+**Constraints:**
+
+-   The number of nodes in the graph is in the range  `[0, 100]`.
+-   `1 <= Node.val <= 100`
+-   `Node.val`  is unique for each node.
+-   There are no repeated edges and no self-loops in the graph.
+-   The Graph is connected and all nodes can be visited starting from the given node.
 ```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        oldToNew = {} # add old and new node copy mappings
+        
+        def dfs(node):
+            if node in oldToNew:
+                return oldToNew[node]
+            
+            # make copy
+            copy = Node(node.val)
+            oldToNew[node] = copy
+            
+            for nei in node.neighbors:
+                copy.neighbors.append(dfs(nei))
+            
+            return copy
+        
+        return dfs(node) if node else None
 ```
 ---
 # 77. Pacific Atlantic Water Flow
+There is an  `m x n`  rectangular island that borders both the  **Pacific Ocean**  and  **Atlantic Ocean**. The  **Pacific Ocean**  touches the island's left and top edges, and the  **Atlantic Ocean**  touches the island's right and bottom edges.
+
+The island is partitioned into a grid of square cells. You are given an  `m x n`  integer matrix  `heights`  where  `heights[r][c]`  represents the  **height above sea level**  of the cell at coordinate  `(r, c)`.
+
+The island receives a lot of rain, and the rain water can flow to neighboring cells directly north, south, east, and west if the neighboring cell's height is  **less than or equal to**  the current cell's height. Water can flow from any cell adjacent to an ocean into the ocean.
+
+Return  _a  **2D list**  of grid coordinates_ `result` _where_ `result[i] = [ri, ci]` _denotes that rain water can flow from cell_ `(ri, ci)` _to  **both**  the Pacific and Atlantic oceans_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/06/08/waterflow-grid.jpg)
+
+**Input:** heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
+**Output:** [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+
+**Example 2:**
+
+**Input:** heights = [[2,1],[1,2]]
+**Output:** [[0,0],[0,1],[1,0],[1,1]]
+
+**Constraints:**
+
+-   `m == heights.length`
+-   `n == heights[r].length`
+-   `1 <= m, n <= 200`
+-   `0 <= heights[r][c] <= 105`
 
 ```python
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        ROWS, COLS = len(heights), len(heights[0])
+        pac, atl = set(), set()
+        
+        def dfs(r, c, visit, prevHeight):
+            if ((r,c) in visit or r < 0 or c < 0 or r == ROWS or c == COLS or heights[r][c] < prevHeight):
+                return 
+                
+            visit.add((r, c))
+            # dfs all adjacent neighbours
+            dfs(r+1, c, visit, heights[r][c])
+            dfs(r-1, c, visit, heights[r][c])
+            dfs(r, c+1, visit, heights[r][c])
+            dfs(r, c-1, visit, heights[r][c])
+        
+        for c in range(COLS):
+            dfs(0, c, pac, heights[0][c]) #top
+            dfs(ROWS-1, c, atl, heights[ROWS-1][c]) #bottom
+            
+        for r in range(ROWS):
+            dfs(r, 0, pac, heights[r][0]) #left
+            dfs(r, COLS-1, atl, heights[r][COLS -1]) #right
+          
+        res = []
+        for r in range(ROWS):
+            for c in range(COLS):
+                if (r, c) in pac and (r, c) in atl:
+                    res.append([r, c])
+        
+        return res
+                    
 ```
 ---
 # 78. Number of Islands
@@ -3319,8 +3960,59 @@ class Solution:
 ```
 ---
 # 80. Rotate List
+Given the  `head`  of a linked list, rotate the list to the right by  `k`  places.
 
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/11/13/rotate1.jpg)
+
+**Input:** head = [1,2,3,4,5], k = 2
+**Output:** [4,5,1,2,3]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/11/13/roate2.jpg)
+
+**Input:** head = [0,1,2], k = 4
+**Output:** [2,0,1]
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[0, 500]`.
+-   `-100 <= Node.val <= 100`
+-   `0 <= k <= 2 * 109`
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head:
+            return
+        
+        length = 1
+        cur = head
+        while cur.next:
+            length += 1
+            cur = cur.next
+        
+        k = k % length
+        if k == 0:
+            return head
+        
+        tail = head
+        for i in range(length-k-1):
+            tail = tail.next
+        
+        newHead = tail.next
+        tail.next = None
+        cur.next = head
+        
+        return newHead
+        
+            
 ```
 ---
 # 81. Swap Nodes in Pairs
