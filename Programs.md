@@ -3575,13 +3575,107 @@ class Solution:
 ---
 
 # 69. Partition to K Equal Sum Subsets
+Given an integer array  `nums`  and an integer  `k`, return  `true`  if it is possible to divide this array into  `k`  non-empty subsets whose sums are all equal.
+
+**Example 1:**
+
+**Input:** nums = [4,3,2,3,5,2,1], k = 4
+**Output:** true
+**Explanation:** It is possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
+
+**Example 2:**
+
+**Input:** nums = [1,2,3,4], k = 3
+**Output:** false
+
+**Constraints:**
+
+-   `1 <= k <= nums.length <= 16`
+-   `1 <= nums[i] <= 104`
+-   The frequency of each element is in the range  `[1, 4]`.
 
 ```python
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        if sum(nums) % k != 0:
+            return False
+        
+        nums.sort(reverse= True)
+        
+        target = sum(nums) / k
+        used = [False] * len(nums)
+        
+        def backtrack(i, k, subsetSum):
+            if k==0:
+                return True
+            
+            if subsetSum == target:
+                return backtrack(0, k-1, 0)
+            
+            for j in range(i, len(nums)):
+                if used[j] or subsetSum + nums[j] > target or (j > 0 and nums[j] == nums[j-1] and not used[j-1]):
+                    continue
+                
+                used[j] = True
+                if backtrack(j+1, k, subsetSum + nums[j]):
+                    return True
+                used[j] = False
+                
+            return False
+                
+        return backtrack(0, k, 0)
 ```
 ---
 # 70. Best Time to Buy and Sell Stock with Cooldown
+You are given an array  `prices`  where  `prices[i]`  is the price of a given stock on the  `ith`  day.
+
+Find the maximum profit you can achieve. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times) with the following restrictions:
+
+-   After you sell your stock, you cannot buy stock on the next day (i.e., cooldown one day).
+
+**Note:**  You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+
+**Example 1:**
+
+**Input:** prices = [1,2,3,0,2]
+**Output:** 3
+**Explanation:** transactions = [buy, sell, cooldown, buy, sell]
+
+**Example 2:**
+
+**Input:** prices = [1]
+**Output:** 0
+
+**Constraints:**
+
+-   `1 <= prices.length <= 5000`
+-   `0 <= prices[i] <= 1000`
 
 ```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        dp = {} # key = (i, buying), value = max_profit
+        
+        def dfs(i, buying):
+            if i >= len(prices):
+                return 0
+            
+            if (i, buying) in dp:
+                return dp[(i, buying)]
+            
+            if buying:
+                buy = dfs(i+1, not buying) - prices[i]
+                cooldown = dfs(i+1, buying)
+                dp[(i, buying)] = max(buy, cooldown)
+            else:
+                sell = dfs(i+2, not buying) + prices[i]
+                cooldown = dfs(i+1, buying)
+                dp[(i, buying)] = max(sell, cooldown)
+                
+            return dp[(i, buying)]
+        
+        return dfs(0, True)
+        
 ```
 ---
 
@@ -3715,8 +3809,63 @@ class Solution:
 ---
 
 # 73. Remove Nth Node From End Of List
+Given the  `head`  of a linked list, remove the  `nth`  node from the end of the list and return its head.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg)
+
+**Input:** head = [1,2,3,4,5], n = 2
+**Output:** [1,2,3,5]
+
+**Example 2:**
+
+**Input:** head = [1], n = 1
+**Output:** []
+
+**Example 3:**
+
+**Input:** head = [1,2], n = 1
+**Output:** [1]
+
+**Constraints:**
+
+-   The number of nodes in the list is  `sz`.
+-   `1 <= sz <= 30`
+-   `0 <= Node.val <= 100`
+-   `1 <= n <= sz`
+
+**Follow up:**  Could you do this in one pass?
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        cur = head
+        count = 0
+        while cur:
+            count+=1
+            cur = cur.next
+            
+        if count > n:
+            pos = count - n
+            cur = head
+            while pos > 1:
+                cur = cur.next
+                pos-=1
+        
+            temp = cur.next
+            cur.next = temp.next
+            temp.next = None
+        elif count == n:
+            head = head.next
+        
+        return head
+        
 ```
 ---
 
@@ -3800,8 +3949,80 @@ class Solution:
 ```
 ---
 # 75. Reorder List
+You are given the head of a singly linked-list. The list can be represented as:
+
+L0 → L1 → … → Ln - 1 → Ln
+
+_Reorder the list to be on the following form:_
+
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/04/reorder1linked-list.jpg)
+
+**Input:** head = [1,2,3,4]
+**Output:** [1,4,2,3]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/03/09/reorder2-linked-list.jpg)
+
+**Input:** head = [1,2,3,4,5]
+**Output:** [1,5,2,4,3]
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[1, 5 * 104]`.
+-   `1 <= Node.val <= 1000`
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        # reverse the second half of the list
+        # merge the list
+        
+        if not head or not head.next:
+            return head
+        
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        second = slow.next
+        slow.next = None
+        
+        prev = None
+        cur = second
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev, cur = cur, nxt
+        
+        l1, l2 = head, prev
+        
+        while l2:
+            nxtl1 = l1.next
+            nxtl2 = l2.next
+            
+            l1.next = l2
+            l2.next = nxtl1
+            
+            l1 = nxtl1
+            l2 = nxtl2
+            
+        
 ```
 ---
 # 76. Clone Graph
@@ -3950,13 +4171,130 @@ class Solution:
 ```
 ---
 # 78. Number of Islands
+Given an  `m x n`  2D binary grid  `grid`  which represents a map of  `'1'`s (land) and  `'0'`s (water), return  _the number of islands_.
+
+An  **island**  is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+**Example 1:**
+
+**Input:** grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+**Output:** 1
+
+**Example 2:**
+
+**Input:** grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+**Output:** 3
+
+**Constraints:**
+
+-   `m == grid.length`
+-   `n == grid[i].length`
+-   `1 <= m, n <= 300`
+-   `grid[i][j]`  is  `'0'`  or  `'1'`.
 
 ```python
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
+        
+        ROWS, COLS = len(grid), len(grid[0])
+        visit = set()
+        islands = 0
+        
+        def bfs(r, c):
+            q = collections.deque()
+            visit.add((r, c))
+            q.append([r, c])
+            
+            while q:
+                row, col = q.popleft()
+                directions = [[1,0],[-1,0],[0,1],[0,-1]]
+                for dr, dc in directions:
+                    if ((row +dr) in range(ROWS) and (col+dc) in range(COLS) and
+                        grid[row+dr][col+dc] == "1" and
+                        (row+dr, col+dc) not in visit):
+                        q.append([row+dr, col+dc])
+                        visit.add((row+dr, col+dc))
+        
+        
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == "1" and (r,c) not in visit:
+                    bfs(r, c)
+                    islands+=1
+        
+        return islands
+        
 ```
 ---
 # 79. Reverse Linked List II
+Given the  `head`  of a singly linked list and two integers  `left`  and  `right`  where  `left <= right`, reverse the nodes of the list from position  `left`  to position  `right`, and return  _the reversed list_.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/02/19/rev2ex2.jpg)
+
+**Input:** head = [1,2,3,4,5], left = 2, right = 4
+**Output:** [1,4,3,2,5]
+
+**Example 2:**
+
+**Input:** head = [5], left = 1, right = 1
+**Output:** [5]
+
+**Constraints:**
+
+-   The number of nodes in the list is  `n`.
+-   `1 <= n <= 500`
+-   `-500 <= Node.val <= 500`
+-   `1 <= left <= right <= n`
+
+**Follow up:** Could you do it in one pass?
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        if not head:
+            return head
+        
+        dummy = ListNode(0, head)
+        leftPrev, cur = dummy, head
+        
+        # 1) reach the node at position "left"
+        for i in range(left -1):
+            leftPrev, cur = cur, cur.next
+            
+        # Now cur="left", leftPrev ="node before left"
+        # 2) reverse from left to right
+        prev = None
+        for i in range(right-left+1):
+            tmpNext = cur.next
+            cur.next = prev
+            prev, cur = cur , tmpNext
+        
+        # update pointers
+        leftPrev.next.next = cur # cur is node after "right"
+        leftPrev.next = prev # prev is "right"
+        
+        return dummy.next
+        
+        
 ```
 ---
 # 80. Rotate List
@@ -4021,8 +4359,55 @@ class Solution:
 ```
 ---
 # 82. Odd Even Linked List
+Given the  `head`  of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return  _the reordered list_.
+
+The  **first**  node is considered  **odd**, and the  **second**  node is  **even**, and so on.
+
+Note that the relative order inside both the even and odd groups should remain as it was in the input.
+
+You must solve the problem in  `O(1)` extra space complexity and  `O(n)`  time complexity.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/03/10/oddeven-linked-list.jpg)
+
+**Input:** head = [1,2,3,4,5]
+**Output:** [1,3,5,2,4]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/03/10/oddeven2-linked-list.jpg)
+
+**Input:** head = [2,1,3,5,6,4,7]
+**Output:** [2,3,6,7,1,5,4]
+
+**Constraints:**
+
+-   The number of nodes in the linked list is in the range  `[0, 104]`.
+-   `-106  <= Node.val <= 106`
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        oddHead, evenHead, even = head, head.next, head.next
+        
+        while evenHead and evenHead.next:
+            oddHead.next = evenHead.next # 1 -> 3
+            oddHead = evenHead.next # 1 = 3
+            evenHead.next = oddHead.next # 2 -> 4
+            evenHead = oddHead.next # 2 = 4
+            
+        oddHead.next = even
+        
+        return head
 ```
 ---
 # 83. Kth Smallest Element in a Sorted Matrix
