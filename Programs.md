@@ -4183,6 +4183,7 @@ An  **island**  is surrounded by water and is formed by connecting adjacent land
   ["1","1","0","0","0"],
   ["0","0","0","0","0"]
 ]
+
 **Output:** 1
 
 **Example 2:**
@@ -4193,6 +4194,7 @@ An  **island**  is surrounded by water and is formed by connecting adjacent land
   ["0","0","1","0","0"],
   ["0","0","0","1","1"]
 ]
+
 **Output:** 3
 
 **Constraints:**
@@ -4354,8 +4356,57 @@ class Solution:
 ```
 ---
 # 81. Swap Nodes in Pairs
+Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg)
+
+**Input:** head = [1,2,3,4]
+**Output:** [2,1,4,3]
+
+**Example 2:**
+
+**Input:** head = []
+**Output:** []
+
+**Example 3:**
+
+**Input:** head = [1]
+**Output:** [1]
+
+**Constraints:**
+
+-   The number of nodes in the list is in the range  `[0, 100]`.
+-   `0 <= Node.val <= 100`
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        prev, cur = dummy, head
+        
+        while cur and cur.next:
+            # save ptrs
+            nextPair = cur.next.next
+            second = cur.next
+            
+            #reverse this pairs
+            second.next = cur
+            cur.next = nextPair
+            prev.next = second
+            
+            #update ptrs
+            prev = cur
+            cur = nextPair
+            
+        return dummy.next
+        
 ```
 ---
 # 82. Odd Even Linked List
@@ -4411,8 +4462,52 @@ class Solution:
 ```
 ---
 # 83. Kth Smallest Element in a Sorted Matrix
+Given an  `n x n`  `matrix`  where each of the rows and columns is sorted in ascending order, return  _the_  `kth`  _smallest element in the matrix_.
+
+Note that it is the  `kth`  smallest element  **in the sorted order**, not the  `kth`  **distinct**  element.
+
+You must find a solution with a memory complexity better than  `O(n2)`.
+
+**Example 1:**
+
+**Input:** matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
+**Output:** 13
+**Explanation:** The elements in the matrix are [1,5,9,10,11,12,13,**13**,15], and the 8th smallest number is 13
+
+**Example 2:**
+
+**Input:** matrix = [[-5]], k = 1
+**Output:** -5
+
+**Constraints:**
+
+-   `n == matrix.length == matrix[i].length`
+-   `1 <= n <= 300`
+-   `-109  <= matrix[i][j] <= 109`
+-   All the rows and columns of  `matrix`  are  **guaranteed**  to be sorted in  **non-decreasing order**.
+-   `1 <= k <= n2`
+
+**Follow up:**
+
+-   Could you solve the problem with a constant memory (i.e.,  `O(1)`  memory complexity)?
+-   Could you solve the problem in  `O(n)`  time complexity? The solution may be too advanced for an interview but you may find reading  [this paper](http://www.cse.yorku.ca/~andy/pubs/X+Y.pdf)  fun.
 
 ```python
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        '''
+        The easy approach is that we iterate all elements in the matrix and and add elements into the maxHeap. The maxHeap will keep up to k smallest elements (because when maxHeap is over size of k, we do remove the top of maxHeap which is the largest one). Finally, the top of the maxHeap is the kth smallest element in the matrix.
+        '''
+        m , n = len(matrix), len(matrix[0])
+        maxHeap = []
+        
+        for r in range(m):
+            for c in range(n):
+                heappush(maxHeap, -matrix[r][c])
+                if len(maxHeap) > k:
+                    heappop(maxHeap)
+            
+        return -heappop(maxHeap)
 ```
 ---
 # 84. Find K Pairs with Smallest Sums
@@ -4421,13 +4516,96 @@ class Solution:
 ```
 ---
 # 85. Merge Intervals
+Given an array of  `intervals` where  `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return  _an array of the non-overlapping intervals that cover all the intervals in the input_.
+
+**Example 1:**
+
+**Input:** intervals = [[1,3],[2,6],[8,10],[15,18]]
+**Output:** [[1,6],[8,10],[15,18]]
+**Explanation:** Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+
+**Example 2:**
+
+**Input:** intervals = [[1,4],[4,5]]
+**Output:** [[1,5]]
+**Explanation:** Intervals [1,4] and [4,5] are considered overlapping.
+
+**Constraints:**
+
+-   `1 <= intervals.length <= 104`
+-   `intervals[i].length == 2`
+-   `0 <= starti  <= endi  <= 104`
 
 ```python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # sort by first coordinate
+        intervals.sort(key = lambda i : i[0])
+        output = [intervals[0]]
+        
+        # [1, 4] [2, 6] gives [1, 6]
+        for start, end in intervals[1:]:
+            lastEnd = output[-1][1] #last entry end value
+            
+            if start <= lastEnd:
+                output[-1][1] = max(lastEnd, end) # [1,5] [2, 4] = [1, 5]
+            else:
+                output.append([start, end])
+        
+        return output
+                
+       
 ```
 ---
 # 86. Interval List Intersections
+You are given two lists of closed intervals,  `firstList`  and  `secondList`, where  `firstList[i] = [starti, endi]`  and  `secondList[j] = [startj, endj]`. Each list of intervals is pairwise  **disjoint**  and in  **sorted order**.
+
+Return  _the intersection of these two interval lists_.
+
+A  **closed interval**  `[a, b]`  (with  `a <= b`) denotes the set of real numbers  `x`  with  `a <= x <= b`.
+
+The  **intersection**  of two closed intervals is a set of real numbers that are either empty or represented as a closed interval. For example, the intersection of  `[1, 3]`  and  `[2, 4]`  is  `[2, 3]`.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2019/01/30/interval1.png)
+
+**Input:** firstList = [[0,2],[5,10],[13,23],[24,25]], secondList = [[1,5],[8,12],[15,24],[25,26]]
+**Output:** [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+
+**Example 2:**
+
+**Input:** firstList = [[1,3],[5,9]], secondList = []
+**Output:** []
+
+**Constraints:**
+
+-   `0 <= firstList.length, secondList.length <= 1000`
+-   `firstList.length + secondList.length >= 1`
+-   `0 <= starti  < endi  <= 109`
+-   `endi  < starti+1`
+-   `0 <= startj  < endj  <= 109`
+-   `endj  < startj+1`
 
 ```python
+class Solution:
+    def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+         # given [1, 3] [2, 4] common will be [2,3] which is max of 1 & 2 and min of 3, 4   
+        i, j = 0, 0
+        res = []
+        while (i < len(firstList) and j < len(secondList)):
+            interval_start = max(firstList[i][0], secondList[j][0])
+            interval_end = min(firstList[i][1], secondList[j][1])
+           
+            if interval_start <= interval_end:
+                res.append([interval_start,interval_end])
+                
+            if firstList[i][1] < secondList[j][1]:
+                i +=1
+            else:
+                j+=1
+                
+        return res
 ```
 ---
 # 87. Non-overlapping Intervals
