@@ -192,7 +192,9 @@ Each time you can either climb  `1`  or  `2`  steps. In how many distinct ways c
 **Example 1:**
 
 **Input:** n = 2
+
 **Output:** 2
+
 **Explanation:** There are two ways to climb to the top.
 1. 1 step + 1 step
 2. 2 steps
@@ -200,7 +202,9 @@ Each time you can either climb  `1`  or  `2`  steps. In how many distinct ways c
 **Example 2:**
 
 **Input:** n = 3
+
 **Output:** 3
+
 **Explanation:** There are three ways to climb to the top.
 1. 1 step + 1 step + 1 step
 2. 1 step + 2 steps
@@ -237,14 +241,18 @@ Return  _the maximum profit you can achieve from this transaction_. If you canno
 **Example 1:**
 
 **Input:** prices = [7,1,5,3,6,4]
+
 **Output:** 5
+
 **Explanation:** Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
 Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
 
 **Example 2:**
 
 **Input:** prices = [7,6,4,3,1]
+
 **Output:** 0
+
 **Explanation:** In this case, no transactions are done and the max profit = 0.
 
 **Constraints:**
@@ -372,7 +380,9 @@ Given an integer  `n`, return  _an array_ `ans` _of length_ `n + 1` _such that f
 **Example 1:**
 
 **Input:** n = 2
+
 **Output:** [0,1,1]
+
 **Explanation:**
 0 --> 0
 1 --> 1
@@ -381,7 +391,9 @@ Given an integer  `n`, return  _an array_ `ans` _of length_ `n + 1` _such that f
 **Example 2:**
 
 **Input:** n = 5
+
 **Output:** [0,1,1,2,1,2]
+
 **Explanation:**
 0 --> 0
 1 --> 1
@@ -428,7 +440,9 @@ Return `true` _if there is a cycle in the linked list_. Otherwise, return  `fals
 ![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png)
 
 **Input:** head = [3,2,0,-4], pos = 1
+
 **Output:** true
+
 **Explanation:** There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
 
 **Example 2:**
@@ -436,7 +450,9 @@ Return `true` _if there is a cycle in the linked list_. Otherwise, return  `fals
 ![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png)
 
 **Input:** head = [1,2], pos = 0
+
 **Output:** true
+
 **Explanation:** There is a cycle in the linked list, where the tail connects to the 0th node.
 
 **Example 3:**
@@ -444,7 +460,9 @@ Return `true` _if there is a cycle in the linked list_. Otherwise, return  `fals
 ![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png)
 
 **Input:** head = [1], pos = -1
+
 **Output:** false
+
 **Explanation:** There is no cycle in the linked list.
 
 **Constraints:**
@@ -486,7 +504,9 @@ If there are two middle nodes, return  **the second middle**  node.
 ![](https://assets.leetcode.com/uploads/2021/07/23/lc-midlist1.jpg)
 
 **Input:** head = [1,2,3,4,5]
+
 **Output:** [3,4,5]
+
 **Explanation:** The middle node of the list is node 3.
 
 **Example 2:**
@@ -494,7 +514,9 @@ If there are two middle nodes, return  **the second middle**  node.
 ![](https://assets.leetcode.com/uploads/2021/07/23/lc-midlist2.jpg)
 
 **Input:** head = [1,2,3,4,5,6]
+
 **Output:** [4,5,6]
+
 **Explanation:** Since the list has two middle nodes with values 3 and 4, we return the second one.
 
 **Constraints:**
@@ -531,6 +553,7 @@ Given the  `head`  of a singly linked list, return  `true`  if it is a palindrom
 ![](https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg)
 
 **Input:** head = [1,2,2,1]
+
 **Output:** true
 
 **Example 2:**
@@ -538,6 +561,7 @@ Given the  `head`  of a singly linked list, return  `true`  if it is a palindrom
 ![](https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg)
 
 **Input:** head = [1,2]
+
 **Output:** false
 
 **Constraints:**
@@ -593,16 +617,19 @@ Given the  `head`  of a linked list and an integer  `val`, remove all the nodes 
 ![](https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg)
 
 **Input:** head = [1,2,6,3,4,5,6], val = 6
+
 **Output:** [1,2,3,4,5]
 
 **Example 2:**
 
 **Input:** head = [], val = 1
+
 **Output:** []
 
 **Example 3:**
 
 **Input:** head = [7,7,7,7], val = 7
+
 **Output:** []
 
 **Constraints:**
@@ -646,6 +673,7 @@ Given the  `head`  of a sorted linked list,  _delete all duplicates such that ea
 ![](https://assets.leetcode.com/uploads/2021/01/04/list1.jpg)
 
 **Input:** head = [1,1,2]
+
 **Output:** [1,2]
 
 **Example 2:**
@@ -653,6 +681,7 @@ Given the  `head`  of a sorted linked list,  _delete all duplicates such that ea
 ![](https://assets.leetcode.com/uploads/2021/01/04/list2.jpg)
 
 **Input:** head = [1,1,2,3,3]
+
 **Output:** [1,2,3]
 
 **Constraints:**
@@ -695,6 +724,7 @@ Given the  `head`  of a singly linked list, reverse the list, and return  _the r
 ![](https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)
 
 **Input:** head = [1,2,3,4,5]
+
 **Output:** [5,4,3,2,1]
 
 **Example 2:**
@@ -702,11 +732,13 @@ Given the  `head`  of a singly linked list, reverse the list, and return  _the r
 ![](https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg)
 
 **Input:** head = [1,2]
+
 **Output:** [2,1]
 
 **Example 3:**
 
 **Input:** head = []
+
 **Output:** []
 
 **Constraints:**
@@ -749,16 +781,19 @@ Return  _the head of the merged linked list_.
 ![](https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg)
 
 **Input:** list1 = [1,2,4], list2 = [1,3,4]
+
 **Output:** [1,1,2,3,4,4]
 
 **Example 2:**
 
 **Input:** list1 = [], list2 = []
+
 **Output:** []
 
 **Example 3:**
 
 **Input:** list1 = [], list2 = [0]
+
 **Output:** [0]
 
 **Constraints:**
@@ -766,6 +801,7 @@ Return  _the head of the merged linked list_.
 -   The number of nodes in both lists is in the range  `[0, 50]`.
 -   `-100 <= Node.val <= 100`
 -   Both  `list1`  and  `list2`  are sorted in  **non-decreasing**  order.
+
 `Two pointers LTE 21`
 ```python
         # Definition for singly-linked list.
@@ -806,13 +842,17 @@ You must write an algorithm with  `O(log n)`  runtime complexity.
 **Example 1:**
 
 **Input:** nums = [-1,0,3,5,9,12], target = 9
+
 **Output:** 4
+
 **Explanation:** 9 exists in nums and its index is 4
 
 **Example 2:**
 
 **Input:** nums = [-1,0,3,5,9,12], target = 2
+
 **Output:** -1
+
 **Explanation:** 2 does not exist in nums so return -1
 
 **Constraints:**
@@ -852,11 +892,13 @@ Given a characters array  `letters`  that is sorted in  **non-decreasing**  orde
 **Example 1:**
 
 **Input:** letters = ["c","f","j"], target = "a"
+
 **Output:** "c"
 
 **Example 2:**
 
 **Input:** letters = ["c","f","j"], target = "c"
+
 **Output:** "f"
 
 **Example 3:**
@@ -909,16 +951,19 @@ Given an integer array  `arr`  that is  **guaranteed**  to be a mountain, return
 **Example 1:**
 
 **Input:** arr = [0,1,0]
+
 **Output:** 1
 
 **Example 2:**
 
 **Input:** arr = [0,2,1,0]
+
 **Output:** 1
 
 **Example 3:**
 
 **Input:** arr = [0,10,5,2]
+
 **Output:** 1
 
 **Constraints:**
@@ -956,6 +1001,7 @@ Given the `root` of a binary tree, return _the average value of the nodes on eac
 ![](https://assets.leetcode.com/uploads/2021/03/09/avg1-tree.jpg)
 
 **Input:** root = [3,9,20,null,null,15,7]
+
 **Output:** [3.00000,14.50000,11.00000]
 Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
 Hence return [3, 14.5, 11].
@@ -965,6 +1011,7 @@ Hence return [3, 14.5, 11].
 ![](https://assets.leetcode.com/uploads/2021/03/09/avg2-tree.jpg)
 
 **Input:** root = [3,9,20,15,7]
+
 **Output:** [3.00000,14.50000,11.00000]
 
 **Constraints:**
@@ -1020,11 +1067,13 @@ The minimum depth is the number of nodes along the shortest path from the root n
 ![](https://assets.leetcode.com/uploads/2020/10/12/ex_depth.jpg)
 
 **Input:** root = [3,9,20,null,null,15,7]
+
 **Output:** 2
 
 **Example 2:**
 
 **Input:** root = [2,null,3,null,4,null,5,null,6]
+
 **Output:** 5
 
 **Constraints:**
@@ -1067,6 +1116,7 @@ Two binary trees are considered the same if they are structurally identical, and
 ![](https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg)
 
 **Input:** p = [1,2,3], q = [1,2,3]
+
 **Output:** true
 
 **Example 2:**
@@ -1074,6 +1124,7 @@ Two binary trees are considered the same if they are structurally identical, and
 ![](https://assets.leetcode.com/uploads/2020/12/20/ex2.jpg)
 
 **Input:** p = [1,2], q = [1,null,2]
+
 **Output:** false
 
 **Example 3:**
@@ -1081,6 +1132,7 @@ Two binary trees are considered the same if they are structurally identical, and
 ![](https://assets.leetcode.com/uploads/2020/12/20/ex3.jpg)
 
 **Input:** p = [1,2,1], q = [1,1,2]
+
 **Output:** false
 
 **Constraints:**
@@ -1118,7 +1170,9 @@ A  **leaf**  is a node with no children.
 ![](https://assets.leetcode.com/uploads/2021/01/18/pathsum1.jpg)
 
 **Input:** root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+
 **Output:** true
+
 **Explanation:** The root-to-leaf path with the target sum is shown.
 
 **Example 2:**
@@ -1126,7 +1180,9 @@ A  **leaf**  is a node with no children.
 ![](https://assets.leetcode.com/uploads/2021/01/18/pathsum2.jpg)
 
 **Input:** root = [1,2,3], targetSum = 5
+
 **Output:** false
+
 **Explanation:** There two root-to-leaf paths in the tree:
 (1 --> 2): The sum is 3.
 (1 --> 3): The sum is 4.
@@ -1135,7 +1191,9 @@ There is no root-to-leaf path with sum = 5.
 **Example 3:**
 
 **Input:** root = [], targetSum = 0
+
 **Output:** false
+
 **Explanation:** Since the tree is empty, there are no root-to-leaf paths.
 
 **Constraints:**
@@ -1179,11 +1237,13 @@ A binary tree's  **maximum depth** is the number of nodes along the longest path
 ![](https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg)
 
 **Input:** root = [3,9,20,null,null,15,7]
+
 **Output:** 3
 
 **Example 2:**
 
 **Input:** root = [1,null,2]
+
 **Output:** 2
 
 **Constraints:**
@@ -1216,17 +1276,21 @@ The  **diameter**  of a binary tree is the  **length**  of the longest path betw
 
 The  **length**  of a path between two nodes is represented by the number of edges between them.
 
+
 **Example 1:**
 
 ![](https://assets.leetcode.com/uploads/2021/03/06/diamtree.jpg)
 
 **Input:** root = [1,2,3,4,5]
+
 **Output:** 3
+
 **Explanation:** 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 
 **Example 2:**
 
 **Input:** root = [1,2]
+
 **Output:** 1
 
 **Constraints:**
@@ -1276,11 +1340,13 @@ Return  _the merged tree_.
 ![](https://assets.leetcode.com/uploads/2021/02/05/merge.jpg)
 
 **Input:** root1 = [1,3,2,5], root2 = [2,1,3,null,4,null,7]
+
 **Output:** [3,4,5,5,4,null,7]
 
 **Example 2:**
 
 **Input:** root1 = [1], root2 = [1,2]
+
 **Output:** [2,2]
 
 **Constraints:**
@@ -1323,7 +1389,9 @@ According to the  [definition of LCA on Wikipedia](https://en.wikipedia.org/wiki
 ![](https://assets.leetcode.com/uploads/2018/12/14/binarysearchtree_improved.png)
 
 **Input:** root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
+
 **Output:** 6
+
 **Explanation:** The LCA of nodes 2 and 8 is 6.
 
 **Example 2:**
@@ -1331,12 +1399,15 @@ According to the  [definition of LCA on Wikipedia](https://en.wikipedia.org/wiki
 ![](https://assets.leetcode.com/uploads/2018/12/14/binarysearchtree_improved.png)
 
 **Input:** root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+
 **Output:** 2
+
 **Explanation:** The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
 
 **Example 3:**
 
 **Input:** root = [2,1], p = 2, q = 1
+
 **Output:** 2
 
 **Constraints:**
@@ -1387,6 +1458,7 @@ A subtree of a binary tree  `tree`  is a tree that consists of a node in  `tree`
 ![](https://assets.leetcode.com/uploads/2021/04/28/subtree1-tree.jpg)
 
 **Input:** root = [3,4,5,1,2], subRoot = [4,1,2]
+
 **Output:** true
 
 **Example 2:**
@@ -1394,6 +1466,7 @@ A subtree of a binary tree  `tree`  is a tree that consists of a node in  `tree`
 ![](https://assets.leetcode.com/uploads/2021/04/28/subtree2-tree.jpg)
 
 **Input:** root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
+
 **Output:** false
 
 **Constraints:**
@@ -1454,6 +1527,7 @@ Given the  `root`  of a binary tree, invert the tree, and return  _its root_.
 ![](https://assets.leetcode.com/uploads/2021/03/14/invert1-tree.jpg)
 
 **Input:** root = [4,2,7,1,3,6,9]
+
 **Output:** [4,7,2,9,6,3,1]
 
 **Example 2:**
@@ -1461,11 +1535,13 @@ Given the  `root`  of a binary tree, invert the tree, and return  _its root_.
 ![](https://assets.leetcode.com/uploads/2021/03/14/invert2-tree.jpg)
 
 **Input:** root = [2,1,3]
+
 **Output:** [2,3,1]
 
 **Example 3:**
 
 **Input:** root = []
+
 **Output:** []
 
 **Constraints:**
@@ -1509,17 +1585,21 @@ You can return the answer in any order.
 **Example 1:**
 
 **Input:** nums = [2,7,11,15], target = 9
+
 **Output:** [0,1]
+
 **Explanation:** Because nums[0] + nums[1] == 9, we return [0, 1].
 
 **Example 2:**
 
 **Input:** nums = [3,2,4], target = 6
+
 **Output:** [1,2]
 
 **Example 3:**
 
 **Input:** nums = [3,3], target = 6
+
 **Output:** [0,1]
 
 **Constraints:**
@@ -1552,13 +1632,16 @@ Given an integer array  `nums`  sorted in  **non-decreasing**  order, return  _a
 **Example 1:**
 
 **Input:** nums = [-4,-1,0,3,10]
+
 **Output:** [0,1,9,16,100]
+
 **Explanation:** After squaring, the array becomes [16,1,0,9,100].
 After sorting, it becomes [0,1,9,16,100].
 
 **Example 2:**
 
 **Input:** nums = [-7,-3,2,3,11]
+
 **Output:** [4,9,9,49,121]
 
 **Constraints:**
@@ -1600,19 +1683,25 @@ Note that after backspacing an empty text, the text will continue empty.
 **Example 1:**
 
 **Input:** s = "ab#c", t = "ad#c"
+
 **Output:** true
+
 **Explanation:** Both s and t become "ac".
 
 **Example 2:**
 
 **Input:** s = "ab##", t = "c#d#"
+
 **Output:** true
+
 **Explanation:** Both s and t become "".
 
 **Example 3:**
 
 **Input:** s = "a#c", t = "b"
+
 **Output:** false
+
 **Explanation:** s becomes "c" while t becomes "b".
 
 **Constraints:**
@@ -1676,11 +1765,13 @@ The majority element is the element that appears more than  `⌊n / 2⌋`  times
 **Example 1:**
 
 **Input:** nums = [3,2,3]
+
 **Output:** 3
 
 **Example 2:**
 
 **Input:** nums = [2,2,1,1,1,2,2]
+
 **Output:** 2
 
 **Constraints:**
@@ -1735,11 +1826,13 @@ You must write an algorithm that runs in `O(n)` time and without using the divis
 **Example 1:**
 
 **Input:** nums = [1,2,3,4]
+
 **Output:** [24,12,8,6]
 
 **Example 2:**
 
 **Input:** nums = [-1,1,0,-3,3]
+
 **Output:** [0,0,9,0,0]
 
 **Constraints:**
@@ -1792,11 +1885,13 @@ You must solve the problem  **without**  modifying the array  `nums` and uses on
 **Example 1:**
 
 **Input:** nums = [1,3,4,2,2]
+
 **Output:** 2
 
 **Example 2:**
 
 **Input:** nums = [3,1,3,4,2]
+
 **Output:** 3
 
 **Constraints:**
@@ -1842,16 +1937,19 @@ You must write an algorithm that runs in `O(n)` time and uses only constant extr
 **Example 1:**
 
 **Input:** nums = [4,3,2,7,8,2,3,1]
+
 **Output:** [2,3]
 
 **Example 2:**
 
 **Input:** nums = [1,1,2]
+
 **Output:** [1]
 
 **Example 3:**
 
 **Input:** nums = [1]
+
 **Output:** []
 
 **Constraints:**
@@ -1889,6 +1987,7 @@ You must do it  [in place](https://en.wikipedia.org/wiki/In-place_algorithm).
 ![](https://assets.leetcode.com/uploads/2020/08/17/mat1.jpg)
 
 **Input:** matrix = [[1,1,1],[1,0,1],[1,1,1]]
+
 **Output:** [[1,0,1],[0,0,0],[1,0,1]]
 
 **Example 2:**
@@ -1896,6 +1995,7 @@ You must do it  [in place](https://en.wikipedia.org/wiki/In-place_algorithm).
 ![](https://assets.leetcode.com/uploads/2020/08/17/mat2.jpg)
 
 **Input:** matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+
 **Output:** [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
 
 **Constraints:**
@@ -1958,6 +2058,7 @@ Given an  `m x n`  `matrix`, return  _all elements of the_  `matrix`  _in spiral
 ![](https://assets.leetcode.com/uploads/2020/11/13/spiral1.jpg)
 
 **Input:** matrix = [[1,2,3],[4,5,6],[7,8,9]]
+
 **Output:** [1,2,3,6,9,8,7,4,5]
 
 **Example 2:**
@@ -1965,6 +2066,7 @@ Given an  `m x n`  `matrix`, return  _all elements of the_  `matrix`  _in spiral
 ![](https://assets.leetcode.com/uploads/2020/11/13/spiral.jpg)
 
 **Input:** matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+
 **Output:** [1,2,3,4,8,12,11,10,9,5,6,7]
 
 **Constraints:**
@@ -2024,6 +2126,7 @@ You have to rotate the image  [**in-place**](https://en.wikipedia.org/wiki/In-pl
 ![](https://assets.leetcode.com/uploads/2020/08/28/mat1.jpg)
 
 **Input:** matrix = [[1,2,3],[4,5,6],[7,8,9]]
+
 **Output:** [[7,4,1],[8,5,2],[9,6,3]]
 
 **Example 2:**
@@ -2031,6 +2134,7 @@ You have to rotate the image  [**in-place**](https://en.wikipedia.org/wiki/In-pl
 ![](https://assets.leetcode.com/uploads/2020/08/28/mat2.jpg)
 
 **Input:** matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+
 **Output:** [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
 
 **Constraints:**
@@ -2080,6 +2184,7 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 ![](https://assets.leetcode.com/uploads/2020/11/04/word2.jpg)
 
 **Input:** board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+
 **Output:** true
 
 **Example 2:**
@@ -2087,6 +2192,7 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 ![](https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg)
 
 **Input:** board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+
 **Output:** true
 
 **Example 3:**
@@ -2094,6 +2200,7 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 ![](https://assets.leetcode.com/uploads/2020/10/15/word3.jpg)
 
 **Input:** board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+
 **Output:** false
 
 **Constraints:**
@@ -2152,12 +2259,15 @@ You must write an algorithm that runs in `O(n)` time.
 **Example 1:**
 
 **Input:** nums = [100,4,200,1,3,2]
+
 **Output:** 4
+
 **Explanation:** The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4.
 
 **Example 2:**
 
 **Input:** nums = [0,3,7,2,5,8,4,6,0,1]
+
 **Output:** 9
 
 **Constraints:**
@@ -2194,11 +2304,13 @@ Return  _a list of all possible strings we could create_. Return the output in  
 **Example 1:**
 
 **Input:** s = "a1b2"
+
 **Output:** ["a1b2","a1B2","A1b2","A1B2"]
 
 **Example 2:**
 
 **Input:** s = "3z4"
+
 **Output:** ["3z4","3Z4"]
 
 **Constraints:**
@@ -2235,11 +2347,13 @@ The solution set  **must not**  contain duplicate subsets. Return the solution i
 **Example 1:**
 
 **Input:** nums = [1,2,3]
+
 **Output:** [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 
 **Example 2:**
 
 **Input:** nums = [0]
+
 **Output:** [[],[0]]
 
 **Constraints:**
@@ -2294,11 +2408,13 @@ The solution set  **must not**  contain duplicate subsets. Return the solution i
 **Example 1:**
 
 **Input:** nums = [1,2,2]
+
 **Output:** [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 **Example 2:**
 
 **Input:** nums = [0]
+
 **Output:** [[],[0]]
 
 **Constraints:**
@@ -2352,16 +2468,19 @@ Given an array  `nums`  of distinct integers, return  _all the possible permutat
 **Example 1:**
 
 **Input:** nums = [1,2,3]
+
 **Output:** [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
 **Example 2:**
 
 **Input:** nums = [0,1]
+
 **Output:** [[0,1],[1,0]]
 
 **Example 3:**
 
 **Input:** nums = [1]
+
 **Output:** [[1]]
 
 **Constraints:**
@@ -2455,6 +2574,7 @@ You may return the answer in  **any order**.
 **Example 1:**
 
 **Input:** n = 4, k = 2
+
 **Output:**
 [
   [2,4],
@@ -2468,6 +2588,7 @@ You may return the answer in  **any order**.
 **Example 2:**
 
 **Input:** n = 1, k = 1
+
 **Output:** [[1]]
 
 **Constraints:**
@@ -2504,7 +2625,9 @@ It is  **guaranteed**  that the number of unique combinations that sum up to  `t
 **Example 1:**
 
 **Input:** candidates = [2,3,6,7], target = 7
+
 **Output:** [[2,2,3],[7]]
+
 **Explanation:**
 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
 7 is a candidate, and 7 = 7.
@@ -2513,11 +2636,13 @@ These are the only two combinations.
 **Example 2:**
 
 **Input:** candidates = [2,3,5], target = 8
+
 **Output:** [[2,2,2,2],[2,3,3],[3,5]]
 
 **Example 3:**
 
 **Input:** candidates = [2], target = 1
+
 **Output:** []
 
 **Constraints:**
@@ -2564,6 +2689,7 @@ Each number in  `candidates` may only be used  **once**  in the combination.
 **Example 1:**
 
 **Input:** candidates = [10,1,2,7,6,1,5], target = 8
+
 **Output:** 
 [
 [1,1,6],
@@ -2575,6 +2701,7 @@ Each number in  `candidates` may only be used  **once**  in the combination.
 **Example 2:**
 
 **Input:** candidates = [2,5,2,1,2], target = 5
+
 **Output:** 
 [
 [1,2,2],
@@ -2632,7 +2759,9 @@ Return  _a list of all possible valid combinations_. The list must not contain t
 **Example 1:**
 
 **Input:** k = 3, n = 7
+
 **Output:** [[1,2,4]]
+
 **Explanation:**
 1 + 2 + 4 = 7
 There are no other valid combinations.
@@ -2697,11 +2826,13 @@ Given  `n`  pairs of parentheses, write a function to  _generate all combination
 **Example 1:**
 
 **Input:** n = 3
+
 **Output:** ["((()))","(()())","(())()","()(())","()()()"]
 
 **Example 2:**
 
 **Input:** n = 1
+
 **Output:** ["()"]
 
 **Constraints:**
@@ -2859,11 +2990,13 @@ A mapping of digits to letters (just like on the telephone buttons) is given bel
 **Example 2:**
 
 **Input:** digits = ""
+
 **Output:** []
 
 **Example 3:**
 
 **Input:** digits = "2"
+
 **Output:** ["a","b","c"]
 
 **Constraints:**
@@ -2911,14 +3044,18 @@ Given an integer array  `nums`  representing the amount of money of each house, 
 **Example 1:**
 
 **Input:** nums = [1,2,3,1]
+
 **Output:** 4
+
 **Explanation:** Rob house 1 (money = 1) and then rob house 3 (money = 3).
 Total amount you can rob = 1 + 3 = 4.
 
 **Example 2:**
 
 **Input:** nums = [2,7,9,3,1]
+
 **Output:** 12
+
 **Explanation:** Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
 Total amount you can rob = 2 + 9 + 1 = 12.
 
@@ -2953,7 +3090,9 @@ Given an integer array  `nums`  representing the amount of money of each house, 
 **Example 1:**
 
 **Input:** nums = [2,3,2]
+
 **Output:** 3
+
 **Explanation:** You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
 
 **Example 2:**
@@ -3005,17 +3144,21 @@ You may assume that you have an infinite number of each kind of coin.
 **Example 1:**
 
 **Input:** coins = [1,2,5], amount = 11
+
 **Output:** 3
+
 **Explanation:** 11 = 5 + 5 + 1
 
 **Example 2:**
 
 **Input:** coins = [2], amount = 3
+
 **Output:** -1
 
 **Example 3:**
 
 **Input:** coins = [1], amount = 0
+
 **Output:** 0
 
 **Constraints:**
@@ -3092,17 +3235,21 @@ A  **subsequence**  is a sequence that can be derived from an array by deleting 
 **Example 1:**
 
 **Input:** nums = [10,9,2,5,3,7,101,18]
+
 **Output:** 4
+
 **Explanation:** The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
 
 **Example 2:**
 
 **Input:** nums = [0,1,0,3,2,3]
+
 **Output:** 4
 
 **Example 3:**
 
 **Input:** nums = [7,7,7,7,7,7,7]
+
 **Output:** 1
 
 **Constraints:**
@@ -3131,12 +3278,15 @@ Given a string  `s`, return  _the longest palindromic substring_  in  `s`.
 **Example 1:**
 
 **Input:** s = "babad"
+
 **Output:** "bab"
+
 **Explanation:** "aba" is also a valid answer.
 
 **Example 2:**
 
 **Input:** s = "cbbd"
+
 **Output:** "bb"
 
 **Constraints:**
@@ -3187,19 +3337,24 @@ Given a string  `s`  and a dictionary of strings  `wordDict`, return  `true`  if
 **Example 1:**
 
 **Input:** s = "leetcode", wordDict = ["leet","code"]
+
 **Output:** true
+
 **Explanation:** Return true because "leetcode" can be segmented as "leet code".
 
 **Example 2:**
 
 **Input:** s = "applepenapple", wordDict = ["apple","pen"]
+
 **Output:** true
+
 **Explanation:** Return true because "applepenapple" can be segmented as "apple pen apple".
 Note that you are allowed to reuse a dictionary word.
 
 **Example 3:**
 
 **Input:** s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+
 **Output:** false
 
 **Constraints:**
@@ -3243,7 +3398,9 @@ The test cases are generated so that the answer can fit in a  **32-bit**  intege
 **Example 1:**
 
 **Input:** nums = [1,2,3], target = 4
+
 **Output:** 7
+
 **Explanation:**
 The possible combination ways are:
 (1, 1, 1, 1)
@@ -3308,18 +3465,23 @@ The test cases are generated so that the answer fits in a  **32-bit**  integer.
 **Example 1:**
 
 **Input:** s = "12"
+
 **Output:** 2
+
 **Explanation:** "12" could be decoded as "AB" (1 2) or "L" (12).
 
 **Example 2:**
 
 **Input:** s = "226"
+
 **Output:** 3
+
 **Explanation:** "226" could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 
 **Example 3:**
 
 **Input:** s = "06"
+
 **Output:** 0
 **Explanation:** "06" cannot be mapped to "F" because of the leading zero ("6" is different from "06").
 
@@ -3363,12 +3525,15 @@ The test cases are generated so that the answer will be less than or equal to  `
 ![](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
 
 **Input:** m = 3, n = 7
+
 **Output:** 28
 
 **Example 2:**
 
 **Input:** m = 3, n = 2
+
 **Output:** 3
+
 **Explanation:** From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
 1. Right -> Down -> Down
 2. Down -> Down -> Right
@@ -3404,13 +3569,17 @@ Return  `true` _if you can reach the last index, or_ `false` _otherwise_.
 **Example 1:**
 
 **Input:** nums = [2,3,1,1,4]
+
 **Output:** true
+
 **Explanation:** Jump 1 step from index 0 to 1, then 3 steps to the last index.
 
 **Example 2:**
 
 **Input:** nums = [3,2,1,0,4]
+
 **Output:** false
+
 **Explanation:** You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
 
 **Constraints:**
@@ -3444,13 +3613,17 @@ A  **substring**  is a contiguous sequence of characters within the string.
 **Example 1:**
 
 **Input:** s = "abc"
+
 **Output:** 3
+
 **Explanation:** Three palindromic strings: "a", "b", "c".
 
 **Example 2:**
 
 **Input:** s = "aaa"
+
 **Output:** 6
+
 **Explanation:** Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
 
 **Constraints:**
@@ -3492,13 +3665,17 @@ Given an integer array `nums`, return  _the number of longest increasing subsequ
 **Example 1:**
 
 **Input:** nums = [1,3,5,4,7]
+
 **Output:** 2
+
 **Explanation:** The two longest increasing subsequences are [1, 3, 4, 7] and [1, 3, 5, 7].
 
 **Example 2:**
 
 **Input:** nums = [2,2,2,2,2]
+
 **Output:** 5
+
 **Explanation:** The length of the longest increasing subsequence is 1, and there are 5 increasing subsequences of length 1, so output 5.
 
 **Constraints:**
@@ -3539,13 +3716,17 @@ Given a  **non-empty**  array  `nums`  containing  **only positive integers**, f
 **Example 1:**
 
 **Input:** nums = [1,5,11,5]
+
 **Output:** true
+
 **Explanation:** The array can be partitioned as [1, 5, 5] and [11].
 
 **Example 2:**
 
 **Input:** nums = [1,2,3,5]
+
 **Output:** false
+
 **Explanation:** The array cannot be partitioned into equal sum subsets.
 
 **Constraints:**
@@ -3580,12 +3761,15 @@ Given an integer array  `nums`  and an integer  `k`, return  `true`  if it is po
 **Example 1:**
 
 **Input:** nums = [4,3,2,3,5,2,1], k = 4
+
 **Output:** true
+
 **Explanation:** It is possible to divide it into 4 subsets (5), (1, 4), (2,3), (2,3) with equal sums.
 
 **Example 2:**
 
 **Input:** nums = [1,2,3,4], k = 3
+
 **Output:** false
 
 **Constraints:**
@@ -3638,12 +3822,15 @@ Find the maximum profit you can achieve. You may complete as many transactions a
 **Example 1:**
 
 **Input:** prices = [1,2,3,0,2]
+
 **Output:** 3
+
 **Explanation:** transactions = [buy, sell, cooldown, buy, sell]
 
 **Example 2:**
 
 **Input:** prices = [1]
+
 **Output:** 0
 
 **Constraints:**
@@ -3691,7 +3878,9 @@ There is a cycle in a linked list if there is some node in the list that can be 
 ![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png)
 
 **Input:** head = [3,2,0,-4], pos = 1
+
 **Output:** tail connects to node index 1
+
 **Explanation:** There is a cycle in the linked list, where tail connects to the second node.
 
 **Example 2:**
@@ -3699,7 +3888,9 @@ There is a cycle in a linked list if there is some node in the list that can be 
 ![](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png)
 
 **Input:** head = [1,2], pos = 0
+
 **Output:** tail connects to node index 0
+
 **Explanation:** There is a cycle in the linked list, where tail connects to the first node.
 
 **Example 3:**
@@ -3759,17 +3950,21 @@ You may assume the two numbers do not contain any leading zero, except the numbe
 ![](https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg)
 
 **Input:** l1 = [2,4,3], l2 = [5,6,4]
+
 **Output:** [7,0,8]
+
 **Explanation:** 342 + 465 = 807.
 
 **Example 2:**
 
 **Input:** l1 = [0], l2 = [0]
+
 **Output:** [0]
 
 **Example 3:**
 
 **Input:** l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+
 **Output:** [8,9,9,9,0,0,0,1]
 
 **Constraints:**
@@ -3816,16 +4011,19 @@ Given the  `head`  of a linked list, remove the  `nth`  node from the end of the
 ![](https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg)
 
 **Input:** head = [1,2,3,4,5], n = 2
+
 **Output:** [1,2,3,5]
 
 **Example 2:**
 
 **Input:** head = [1], n = 1
+
 **Output:** []
 
 **Example 3:**
 
 **Input:** head = [1,2], n = 1
+
 **Output:** [1]
 
 **Constraints:**
@@ -3877,6 +4075,7 @@ Given the  `head`  of a linked list, return  _the list after sorting it in  **as
 ![](https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg)
 
 **Input:** head = [4,2,1,3]
+
 **Output:** [1,2,3,4]
 
 **Example 2:**
@@ -3884,11 +4083,13 @@ Given the  `head`  of a linked list, return  _the list after sorting it in  **as
 ![](https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg)
 
 **Input:** head = [-1,5,3,4,0]
+
 **Output:** [-1,0,3,4,5]
 
 **Example 3:**
 
 **Input:** head = []
+
 **Output:** []
 
 **Constraints:**
@@ -3964,6 +4165,7 @@ You may not modify the values in the list's nodes. Only nodes themselves may be 
 ![](https://assets.leetcode.com/uploads/2021/03/04/reorder1linked-list.jpg)
 
 **Input:** head = [1,2,3,4]
+
 **Output:** [1,4,2,3]
 
 **Example 2:**
@@ -3971,6 +4173,7 @@ You may not modify the values in the list's nodes. Only nodes themselves may be 
 ![](https://assets.leetcode.com/uploads/2021/03/09/reorder2-linked-list.jpg)
 
 **Input:** head = [1,2,3,4,5]
+
 **Output:** [1,5,2,4,3]
 
 **Constraints:**
@@ -4732,8 +4935,65 @@ class Solution:
 ```
 ---
 # 89. Minimum Number of Arrows to Burst Balloons
+There are some spherical balloons taped onto a flat wall that represents the XY-plane. The balloons are represented as a 2D integer array  `points`  where  `points[i] = [xstart, xend]`  denotes a balloon whose  **horizontal diameter**  stretches between  `xstart`  and  `xend`. You do not know the exact y-coordinates of the balloons.
+
+Arrows can be shot up  **directly vertically**  (in the positive y-direction) from different points along the x-axis. A balloon with  `xstart`  and  `xend`  is  **burst**  by an arrow shot at  `x`  if  `xstart  <= x <= xend`. There is  **no limit**  to the number of arrows that can be shot. A shot arrow keeps traveling up infinitely, bursting any balloons in its path.
+
+Given the array  `points`, return  _the  **minimum**  number of arrows that must be shot to burst all balloons_.
+
+**Example 1:**
+
+**Input:** points = [[10,16],[2,8],[1,6],[7,12]]
+
+**Output:** 2
+
+**Explanation:** The balloons can be burst by 2 arrows:
+- Shoot an arrow at x = 6, bursting the balloons [2,8] and [1,6].
+- Shoot an arrow at x = 11, bursting the balloons [10,16] and [7,12].
+
+**Example 2:**
+
+**Input:** points = [[1,2],[3,4],[5,6],[7,8]]
+
+**Output:** 4
+
+**Explanation:** One arrow needs to be shot for each balloon for a total of 4 arrows.
+
+**Example 3:**
+
+**Input:** points = [[1,2],[2,3],[3,4],[4,5]]
+
+**Output:** 2
+
+**Explanation:** The balloons can be burst by 2 arrows:
+- Shoot an arrow at x = 2, bursting the balloons [1,2] and [2,3].
+- Shoot an arrow at x = 4, bursting the balloons [3,4] and [4,5].
+
+**Constraints:**
+
+-   `1 <= points.length <= 105`
+-   `points[i].length == 2`
+-   `-231  <= xstart  < xend  <= 231  - 1`
 
 ```python
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        # problem can be solved by finding the number of overlapping interval. If two intervals are overlapping that means only 1 arrow will be required to burst it.
+        if not points:
+            return 0
+        
+        points.sort()
+        lastEnd = points[0][1]  # last entry end coordinate
+        arrows = 1
+        
+        for start, end in points[1:]:
+            if start > lastEnd:
+                arrows +=1
+                lastEnd = end
+            else:
+                lastEnd = min(lastEnd, end)
+                
+        return arrows
 ```
 ---
 # 90. Insert Interval
