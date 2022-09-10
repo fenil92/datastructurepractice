@@ -4997,18 +4997,184 @@ class Solution:
 ```
 ---
 # 90. Insert Interval
+You are given an array of non-overlapping intervals  `intervals`  where  `intervals[i] = [starti, endi]`  represent the start and the end of the  `ith`  interval and  `intervals`  is sorted in ascending order by  `starti`. You are also given an interval  `newInterval = [start, end]`  that represents the start and end of another interval.
 
+Insert  `newInterval`  into  `intervals`  such that  `intervals`  is still sorted in ascending order by  `starti`  and  `intervals`  still does not have any overlapping intervals (merge overlapping intervals if necessary).
+
+Return  `intervals` _after the insertion_.
+
+**Example 1:**
+
+**Input:** intervals = [[1,3],[6,9]], newInterval = [2,5]
+
+**Output:** [[1,5],[6,9]]
+
+**Example 2:**
+
+**Input:** intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+
+**Output:** [[1,2],[3,10],[12,16]]
+
+**Explanation:** Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+**Constraints:**
+
+-   `0 <= intervals.length <= 104`
+-   `intervals[i].length == 2`
+-   `0 <= starti  <= endi  <= 105`
+-   `intervals`  is sorted by  `starti`  in  **ascending**  order.
+-   `newInterval.length == 2`
+-   `0 <= start <= end <= 105`
 ```python
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        # insert new interval and merge if required. 
+        # [1,2] [3,6] -> insert [0,3] -> [0, 6]
+        result = []
+        
+        for i in range(len(intervals)):
+            if (newInterval[1] < intervals[i][0]):
+                result.append(newInterval)
+                return result +intervals[i:]               
+            elif newInterval[0] <= intervals[i][1]:
+                newInterval = [min(intervals[i][0],newInterval[0]),max(intervals[i][1],newInterval[1])]
+            else:
+                result.append(intervals[i])
+        
+        result.append(newInterval)
+            
+        return result
 ```
 ---
 # 91. Find Minimum in Rotated Sorted Array
+Suppose an array of length  `n`  sorted in ascending order is  **rotated**  between  `1`  and  `n`  times. For example, the array  `nums = [0,1,2,4,5,6,7]`  might become:
+
+-   `[4,5,6,7,0,1,2]`  if it was rotated  `4`  times.
+-   `[0,1,2,4,5,6,7]`  if it was rotated  `7`  times.
+
+Notice that  **rotating**  an array  `[a[0], a[1], a[2], ..., a[n-1]]`  1 time results in the array  `[a[n-1], a[0], a[1], a[2], ..., a[n-2]]`.
+
+Given the sorted rotated array  `nums`  of  **unique**  elements, return  _the minimum element of this array_.
+
+You must write an algorithm that runs in `O(log n) time.`
+
+**Example 1:**
+
+**Input:** nums = [3,4,5,1,2]
+
+**Output:** 1
+
+**Explanation:** The original array was [1,2,3,4,5] rotated 3 times.
+
+**Example 2:**
+
+**Input:** nums = [4,5,6,7,0,1,2]
+
+**Output:** 0
+
+**Explanation:** The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.
+
+**Example 3:**
+
+**Input:** nums = [11,13,15,17]
+**Output:** 11
+**Explanation:** The original array was [11,13,15,17] and it was rotated 4 times. 
+
+**Constraints:**
+
+-   `n == nums.length`
+-   `1 <= n <= 5000`
+-   `-5000 <= nums[i] <= 5000`
+-   All the integers of  `nums`  are  **unique**.
+-   `nums`  is sorted and rotated between  `1`  and  `n`  times.
 
 ```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        # binary search approach works in case of rotated sorted array. 
+        # [3,4,5,1,2] if mid > left -> search right portion else search left portion
+        
+        result = nums[0]
+        l, r = 0 , len(nums)-1
+        
+        while(l<=r):
+            if nums[l] < nums[r]:
+                # means array is sorted
+                result = min(result, nums[l])
+                break
+                
+            m = (l+r)//2
+            result = min(result, nums[m])
+            if nums[m] >= nums[l]:
+                l = m+1
+            else:
+                r = m-1
+            
+        
+        return result
 ```
 ---
 # 92. Find Peak Element
+A peak element is an element that is strictly greater than its neighbors.
+
+Given a  **0-indexed**  integer array  `nums`, find a peak element, and return its index. If the array contains multiple peaks, return the index to  **any of the peaks**.
+
+You may imagine that  `nums[-1] = nums[n] = -∞`. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+You must write an algorithm that runs in  `O(log n)`  time.
+
+**Example 1:**
+
+**Input:** nums = [1,2,3,1]
+
+**Output:** 2
+
+**Explanation:** 3 is a peak element and your function should return the index number 2.
+
+**Example 2:**
+
+**Input:** nums = [1,2,1,3,5,6,4]
+
+**Output:** 5
+
+**Explanation:** Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
+
+**Constraints:**
+
+-   `1 <= nums.length <= 1000`
+-   `-231  <= nums[i] <= 231  - 1`
+-   `nums[i] != nums[i + 1]`  for all valid  `i`.
 
 ```python
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        '''
+        # brute force approach. Time O(n)
+        if not nums or len(nums) == 1:
+            return 0
+        
+        for i in range(len(nums)):
+            if ( i==len(nums)-1 or nums[i] > nums[i+1]) and (i==0 or nums[i] > nums[i-1]):
+                return i
+        
+        return -1
+        '''
+        # Can also be solved using binary search method and time complexity will be O(logn)
+        if not nums or len(nums) == 1:
+            return 0
+        
+        l, r = 0, len(nums)-1
+        while(l< r):
+            m = (l+r) // 2
+            if ((m ==len(nums)-1 or nums[m] > nums[m+1]) and (m==0 or nums[m] > nums[m-1])):
+                return m
+            elif nums[m] > nums[m+1]:
+                r = m
+            else:
+                l = m+1
+        
+        return l
+       
 ```
 ---
 # 93. Search in Rotated Sorted Array
