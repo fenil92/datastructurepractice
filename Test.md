@@ -14,6 +14,7 @@ class Program
             { 67, 87, 78, 77, 65 }
         };
 
+        // Output 325 299 296 => Ignoring 2 index elements
         int[] totalMarks = CalculateTotalMarks(N, M, marks);
 
         Console.WriteLine(string.Join(", ", totalMarks));
