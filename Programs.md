@@ -5607,9 +5607,100 @@ class Solution:
 ```
 ---
 # 146. Minimum Window Substring
+Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 
-```python
+The testcases will be generated such that the answer is unique.
+
+ 
+
+**Example 1:**
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+
+**Example 2:**
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+
+**Example 3:**
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+ 
+
+Constraints:
+
+m == s.length
+n == t.length
+1 <= m, n <= 105
+s and t consist of uppercase and lowercase English letters.
+ 
+
+Follow up: Could you find an algorithm that runs in O(m + n) time?
+
+```csharp
+public class Solution {
+    public string MinWindow(string s, string t) {
+
+        if(string.IsNullOrEmpty(s)) return string.Empty;
+        
+        Dictionary<char, int> countT = new Dictionary<char, int>();
+        Dictionary<char, int> window = new Dictionary<char, int>();
+
+        foreach(var a in t){
+           AddCharToDictionary(a, countT);
+        }
+
+        int l = 0;
+        int need = countT.Count;
+        int have = 0;
+        var res = new[]{ - 1, -1};
+        int resLength = int.MaxValue;
+        for(int r = 0; r < s.Length; r++){
+            char c = s[r];
+            AddCharToDictionary(c, window);
+            if(countT.ContainsKey(c) && window[c] == countT[c])
+            {
+                have++;
+            }
+
+            while(have == need){
+
+                // update the window
+                int windowSize = r - l + 1;
+                if(windowSize < resLength){
+                    res = new[] {l ,r};
+                    resLength = windowSize;
+                }
+
+                // pop from left of our window
+                window[s[l]]--;
+                if(countT.ContainsKey(s[l]) && window[s[l]] < countT[s[l]]){
+                    have--;
+                }
+                l++;
+            }
+        }
+
+        return resLength == int.MaxValue ? string.Empty : s.Substring(res[0], res[1] - res[0] + 1);
+    }
+
+    public static void AddCharToDictionary(char a, Dictionary<char, int> dict){
+         if(dict.ContainsKey(a)){
+                dict[a] +=1;
+            }
+            else{
+                dict.Add(a, 1);
+            }
+    }
+}
 ```
+
 ---
 # 147. Substring with Concatenation of All Words
 
